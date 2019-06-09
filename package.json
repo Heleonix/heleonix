@@ -38,9 +38,11 @@
     }
   },
   "lint-staged": {
-    "*.{js,json}": [
-      "prettier-eslint --write",
-      "git add"
-    ]
+    "linters": {
+      "*.{js,json}": [
+        "prettier-eslint --write",
+        "git add"
+      ]
+    }
   }
 }
