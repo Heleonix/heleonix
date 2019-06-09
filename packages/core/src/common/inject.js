@@ -3,7 +3,7 @@ import { validateEmptyFieldDecoration, validateInjectDecoratorUsage } from '../i
 import { SYMBOLS } from '../internal/Symbols';
 
 export const inject = definition => {
-  const x = 12332;
+  const x = 1232;
 
   validateEmptyFieldDecoration(definition);
 
