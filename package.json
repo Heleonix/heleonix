@@ -38,6 +38,9 @@
     }
   },
   "lint-staged": {
-    "*.{js,json}": "prettier-eslint --write"
+    "*.{js,json}": [
+      "prettier-eslint --write",
+      "git add"
+    ]
   }
 }
