@@ -3,6 +3,8 @@ import { validateEmptyFieldDecoration, validateInjectDecoratorUsage } from '../i
 import { SYMBOLS } from '../internal/Symbols';
 
 export const inject = definition => {
+  const x = 12;
+
   validateEmptyFieldDecoration(definition);
 
   definition.descriptor.enumerable = false;
