@@ -1,0 +1,9 @@
+{
+  "name": "@heleonix/sandbox",
+  "description": "Development-time sandbox to play with the Heleonix framework.",
+  "author": "Heleonix - Hennadii Lutsyshyn",
+  "license": "MIT",
+  "private": true,
+  "scripts": {},
+  "devDependencies": {}
+}
