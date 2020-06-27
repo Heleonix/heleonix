@@ -1,9 +1,8 @@
-export const SYMBOLS = {
-  app: Symbol('app'),
-  kind: Symbol('kind'),
-  getInstance: Symbol('getInstance'),
-  getComponent: Symbol('getComponent'),
-  changed: Symbol('changed'),
-  bag: Symbol('bag'),
-  isHandler: Symbol('isHandler')
+export const Symbols = {
+  DIContainer: Symbol('DIContainer'),
+  subscribe: Symbol('subscribe'),
+  unsubscribe: Symbol('unsubscribe'),
+  ErrorHandler: Symbol('ErrorHandler'),
+  handle: Symbol('handle'),
+  getDefinition: Symbol('getResource'),
 };

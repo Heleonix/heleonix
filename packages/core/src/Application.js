@@ -1,46 +1,50 @@
-import { SYMBOLS } from './internal/Symbols';
-import { ERROR_MESSAGES, error } from './internal/Errors';
+import { isDomElementName } from './internal/helpers/isDomElementName';
+import { DomElement } from './internal/DomElement';
+import { Children } from './internal/Children';
+import { ErrorHandler } from './internal/ErrorHandler';
 
 export class Application {
-  #instances = new Map();
-
-  #injector = { [SYMBOLS.app]: this };
-
-  #componentsCache;
-
-  [SYMBOLS.getComponent](key) {
-    return this.#componentsCache[key];
-  }
-
-  [SYMBOLS.getInstance](key) {
-    if (!this.#componentsCache[key]) {
-      throw error(ERROR_MESSAGES.componentNotRegistered);
-    }
-
-    if (!this.#instances.has(key)) {
-      this.#instances.set(key, new this.#componentsCache[key](this.#injector));
-    }
-
-    return this.#instances.get(key);
-  }
-
-  static get components() {
-    throw error(ERROR_MESSAGES.notImplemented);
-  }
-
   static get root() {
-    throw error(ERROR_MESSAGES.notImplemented);
+    return 'html';
+  }
+
+  static get errorHandler() {
+    return ErrorHandler;
+  }
+
+  [Hidden.getView](name) {
+    if (isDomElementName(name)) {
+      return this[Hidden.getComponent](DomElement.name);
+    }
+
+    return this[Hidden.getComponent](name);
+  }
+
+  [Hidden.getStyle](name) {
+    return this[Hidden.getComponent](`${name}Style`);
+  }
+
+  [Hidden.createViewModel](name) {
+    if (isDomElementName(name)) {
+      return null;
+    }
+
+    const viewModelName = `${name}ViewModel`;
+
+    validateComponentRegistered(this.#componentsCache[viewModelName], viewModelName);
+
+    return this.#createInstance(viewModelName);
   }
 
   run() {
-    this.#componentsCache = this.components;
+    validateCanRunApplication(Application.components, Application.root, Application.entry);
 
-    if (!this.#componentsCache) {
-      throw error(ERROR_MESSAGES.valueNotProvided, 'components');
-    }
+    this.#componentsCache = { ...Application.components, DomElement, Children };
 
-    if (!this.root) {
-      throw error(ERROR_MESSAGES.valueNotProvided, 'root');
-    }
+    const rootElement = document.querySelector(Application.root);
+
+    validateValueProvided(rootElement, 'root');
+
+    this.#presenter[Hidden.build]({ view: Application.entry }, rootElement);
   }
 }

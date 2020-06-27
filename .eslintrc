@@ -1,6 +1,6 @@
 {
-  "extends": ["airbnb-base", "prettier"],
-  "plugins": ["sort-class-members"],
+  "plugins": ["babel"],
+  "extends": ["airbnb-base", "plugin:json/recommended", "plugin:prettier/recommended"],
   "env": {
     "browser": true,
     "jasmine": true

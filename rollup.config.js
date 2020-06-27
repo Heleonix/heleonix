@@ -36,13 +36,13 @@ export default [
     input: INPUT,
     output: { format: 'cjs', file: path.join(PACKAGE_ROOT_PATH, `dist/index.cjs.js`) },
     external: isExternal,
-    plugins: [babel({ rootMode: 'upward', runtimeHelpers: true })]
+    plugins: [babel({ rootMode: 'upward', runtimeHelpers: true })],
   },
   {
     input: INPUT,
     output: { format: 'esm', file: path.join(PACKAGE_ROOT_PATH, `dist/index.esm.js`) },
     external: isExternal,
-    plugins: [babel({ rootMode: 'upward', runtimeHelpers: true })]
+    plugins: [babel({ rootMode: 'upward', runtimeHelpers: true })],
   },
   {
     input: INPUT,
@@ -51,16 +51,16 @@ export default [
       file: path.join(PACKAGE_ROOT_PATH, `dist/index.umd.min.js`),
       name: NAME,
       amd: {
-        id: NAME
+        id: NAME,
       },
-      globals: GLOBALS
+      globals: GLOBALS,
     },
     plugins: [
       babel({ rootMode: 'upward', runtimeHelpers: true }),
       nodeResolve(),
       commonjs({ include: /node_modules/ }),
       replace({ 'process.env.NODE_ENV': JSON.stringify('production') }),
-      terser()
-    ]
-  }
+      terser(),
+    ],
+  },
 ];

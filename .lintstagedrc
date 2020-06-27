@@ -2,10 +2,6 @@
   "concurrent": false,
   "linters": {
     "*.{js,json}": [
-      "prettier --write",
-      "git add"
-    ],
-    "*.js": [
       "eslint --fix",
       "git add"
     ]

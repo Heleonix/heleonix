@@ -5,10 +5,12 @@ module.exports = api => {
     presets: ['@babel/preset-env'],
     plugins: [
       ['@babel/plugin-proposal-decorators', { decoratorsBeforeExport: false }],
-      '@babel/plugin-proposal-private-methods',
       '@babel/plugin-proposal-class-properties',
-      ['@babel/plugin-transform-runtime', { corejs: 3 }]
+      '@babel/plugin-proposal-private-methods',
+      '@babel/plugin-proposal-optional-chaining',
+      '@babel/plugin-proposal-null-coalescing-operator',
+      ['@babel/plugin-transform-runtime', { corejs: { version: 3, proposals: true } }],
     ],
-    exclude: /node_modules/
+    exclude: /node_modules/,
   };
 };

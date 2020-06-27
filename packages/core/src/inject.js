@@ -1,8 +1,21 @@
-import { validateEmptyFieldDecoration, validateInjectDecoratorUsage } from './internal/Rules';
-import { SYMBOLS } from './internal/Symbols';
+import { Symbols } from './internal/Symbols';
+import { InvalidInjectableMemberError } from './errors/InvalidInjectableMemberError';
+import { InvalidInjectableError } from './errors/InvalidInjectableError';
+
+function assertCorrectMember(definition) {
+  if (definition.kind !== 'field' && definition.placement !== 'own') {
+    throw new InvalidInjectableMemberError(definition.key);
+  }
+}
+
+function assertIsInjectable(instance) {
+  if (!instance?.[Symbols.DIContainer]) {
+    throw new InvalidInjectableError(instance?.constructor.name);
+  }
+}
 
 export function inject(definition) {
-  validateEmptyFieldDecoration(definition);
+  assertCorrectMember(definition);
 
   const def = definition;
   const { key } = def;
@@ -10,9 +23,9 @@ export function inject(definition) {
   def.descriptor = {};
 
   def.initializer = function initializer() {
-    validateInjectDecoratorUsage(this, key);
+    assertIsInjectable(this);
 
-    return this[SYMBOLS.app][SYMBOLS.getInstance](key);
+    return this[Symbols.DIContainer].getInstanceForInjection(key, this);
   };
 
   return def;
