@@ -1,12 +1,12 @@
 /* eslint-disable import/no-default-export */
 /* eslint-disable import/no-dynamic-require */
+
 import path from 'path';
 import nodeResolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import babel from 'rollup-plugin-babel';
 import replace from 'rollup-plugin-replace';
 import { terser } from 'rollup-plugin-terser';
-import { sizeSnapshot } from 'rollup-plugin-size-snapshot';
 
 // module => Module
 // module-name => ModuleName
@@ -36,31 +36,13 @@ export default [
     input: INPUT,
     output: { format: 'cjs', file: path.join(PACKAGE_ROOT_PATH, `dist/index.cjs.js`) },
     external: isExternal,
-    plugins: [
-      babel({
-        babelrc: false,
-        presets: [['@babel/preset-env']],
-        plugins: [['@babel/plugin-transform-runtime', { corejs: 3 }]],
-        runtimeHelpers: true,
-        exclude: /node_modules/
-      }),
-      sizeSnapshot()
-    ]
+    plugins: [babel({ rootMode: 'upward', runtimeHelpers: true })]
   },
   {
     input: INPUT,
     output: { format: 'esm', file: path.join(PACKAGE_ROOT_PATH, `dist/index.esm.js`) },
     external: isExternal,
-    plugins: [
-      babel({
-        babelrc: false,
-        presets: [['@babel/preset-env']],
-        plugins: [['@babel/plugin-transform-runtime', { corejs: 3, useESModules: true }]],
-        runtimeHelpers: true,
-        exclude: /node_modules/
-      }),
-      sizeSnapshot()
-    ]
+    plugins: [babel({ rootMode: 'upward', runtimeHelpers: true })]
   },
   {
     input: INPUT,
@@ -74,17 +56,10 @@ export default [
       globals: GLOBALS
     },
     plugins: [
-      babel({
-        babelrc: false,
-        presets: [['@babel/preset-env']],
-        plugins: [['@babel/plugin-transform-runtime', { corejs: 3, regenerator: false, useESModules: true }]],
-        runtimeHelpers: true,
-        exclude: /node_modules/
-      }),
+      babel({ rootMode: 'upward', runtimeHelpers: true }),
       nodeResolve(),
       commonjs({ include: /node_modules/ }),
       replace({ 'process.env.NODE_ENV': JSON.stringify('production') }),
-      sizeSnapshot(),
       terser()
     ]
   }

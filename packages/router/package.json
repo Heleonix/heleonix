@@ -15,12 +15,11 @@
     "directory": "packages/router"
   },
   "keywords": [],
-  "scripts": {},
   "sideEffects": false,
   "publishConfig": {
     "access": "public"
   },
   "dependencies": {
-    "@babel/runtime": "^7.4.5"
+    "@babel/runtime": "7.4.5"
   }
 }

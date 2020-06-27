@@ -1,13 +1,17 @@
 import { SYMBOLS } from './internal/Symbols';
-import { ERROR_MESSAGES } from './internal/Errors';
+import { ERROR_MESSAGES, error } from './internal/Errors';
 
 export class Component {
-  constructor(data) {
-    this[SYMBOLS.app] = data[SYMBOLS.app];
+  constructor(injector) {
+    if (!injector?.[SYMBOLS.app]) {
+      throw error(ERROR_MESSAGES.valueNotProvided, 'app');
+    }
+
+    this[SYMBOLS.app] = injector[SYMBOLS.app];
   }
 
   static get [SYMBOLS.kind]() {
-    throw new Error(ERROR_MESSAGES.notImplemented);
+    throw error(ERROR_MESSAGES.notImplemented);
   }
 
   [SYMBOLS.app];

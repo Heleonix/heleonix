@@ -1,6 +1,9 @@
 export const SYMBOLS = {
   app: Symbol('app'),
   kind: Symbol('kind'),
-  instances: Symbol('instances'),
-  changed: Symbol('changed')
+  getInstance: Symbol('getInstance'),
+  getComponent: Symbol('getComponent'),
+  changed: Symbol('changed'),
+  bag: Symbol('bag'),
+  isHandler: Symbol('isHandler')
 };

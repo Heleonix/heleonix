@@ -1,7 +1,9 @@
 {
   "extends": ["airbnb-base", "prettier"],
+  "plugins": ["sort-class-members"],
   "env": {
-    "browser": true
+    "browser": true,
+    "jasmine": true
   },
   "parser": "babel-eslint",
   "parserOptions": {
