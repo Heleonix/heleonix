@@ -16,6 +16,7 @@ Strict and declarative MVVM framework for web sites and web applications.
 
 ### BINDINGS
 
+```
 class Binding {
 	source
 	target
@@ -26,16 +27,19 @@ class Binding {
 
 class PropertyBinding extends Binding {
 }
+```
 
 ### CONTEXT
 
 Context is an object with string values, which splits resources of applications:
 
+```
 {
 	env: 'dev' // Least specific
 	brand: 'brand1',
 	culture: 'uk-UK', // Most specific
 }
+```
 
 In webpack plugins context is specified as below:
 [
@@ -59,6 +63,8 @@ Buttons.en-US.brand1.dic
 Buttons.es-ES.brand1.dic
 
 Buttons.en-US.dic:
+
+```
 <Dictionary>
 	<Add>Add</Add>
 	<Remove>Remove</Remove>
@@ -68,8 +74,11 @@ Buttons.en-US.dic:
 		Hi {username}! Are you {.Ok} or {BaseControls.Cancel}?
 	</OkOrCancel>
 </Dictionary>
+```
 
 Compiled into:
+
+```
 {
 	items: {
 		"Add": "Add",
@@ -78,38 +87,48 @@ Compiled into:
 		"OkOrCancel": "Hi {username}! Do you {.Ok} or {BaseControls.Cancel}?"
 	}
 }
+```
 
 BaseControls.en-US.brand1.dic:
 
+```
 <Dictionary>
 	<Cancel>Cancel</Cancel>
 </Dictionary>
+```
 
 Compiled into:
+
+```
 {
 	"items": {
 		"Cancel": "Cancel"
 	}
 }
+```
 
 ### STYLES (MERGEABLE, EXTENDABLE)
 
 Style is applied as class="auto generated classes" to the root native html elements only  i.e.:
+```
 <div class="auto generated classes">
 	<button/>
 	<button/>
 	<button/>
 </div>
+```
 OR
+```
 <li class="auto generated classes">one</li>
 <li class="auto generated classes">two</li>
 <li class="auto generated classes">three</li>
-
+```
 MyView.style
 MyView.brand1.style
 MyView.en-US.brand1.style
 
 MyView.style:
+```
 <Style extends="MyBaseView">
 	<border-color value="#aaa" />
   <width>
@@ -117,8 +136,10 @@ MyView.style:
     <!-- Think about conditional setting -->
   </color>
 </Style>
+```
 
 Compiled into:
+```
 {
 	"extends": "MyBaseView",
 	"items": {
@@ -126,8 +147,10 @@ Compiled into:
 		"color": "vm => vm.isValid ? 'green' : 'red'"
 	}
 }
+```
 
 Style.js:
+```
 class Style extends Resource {
 	parse(definition) {
 		// Parses definition and extracts static part and dynamic part (typeof function)
@@ -143,11 +166,13 @@ class Style extends Resource {
 		// dynamic string, caches it and returns
 	}
 }
+```
 
 ### VIEWS (EXTENDABLE)
 
 data ans state are not observable and call 'notify' on their view
 
+```
 <Page> <!-- Only page can run tasks -->
 …
 </Page>
@@ -192,13 +217,14 @@ data ans state are not observable and call 'notify' on their view
 		</OnEvent>
 	</FromToList>
 </View>
+```
 
 FromToList.view
 FromToList.brand1.view
 FromToList.brand1.en.view
 
 FromToList.view:
-
+```
 <Partial>
 	<div>
 		<List name="from" />
@@ -207,11 +233,12 @@ FromToList.view:
 		<List name="to" />
 	</div>
 </Partial>
+```
 
 name:
-<[name].template> will be handled specially
+`<[name].template>` will be handled specially
 Everything else will be passed into a control and used by the control internally as <children>
-
+```
 <!--Deep events and deep properties are defined relatively to an element they're defined on-->
 <!--They start deep searching from an element where they're defined-->
 <View>
@@ -243,8 +270,10 @@ CustomFromToList.view
 	</div>
 how to auto-spread properties to elements
 </View>
+```
 
 For:
+```
 <div>
 	<Button value={1} text="Press me"/>
 	<Tabs-users prop1={value1} prop2={value2} prop3={value3}>
@@ -275,8 +304,10 @@ For:
 		</For-tabs>
 	</Tabs>
 </div>
+```
 
 Switch:
+```
 <Switch name="someItems" by="id" OR by={id}>
 	<Case value="{data.someValue}">
 	</Case>
@@ -285,6 +316,7 @@ Switch:
 	<Default>
 	</Default>
 </Switch>
+```
 
 ### SERVICES
 HttpService - provides many scenarios with requests:
