@@ -327,7 +327,7 @@ HttpService - provides many scenarios with requests:
 - etc
 - Returns an empty object with internal promise, so it can be bound to a view, so when promise is resolved, the empty object is populated with data and model is updated and view is refreshed.
 
----------APP STRUCTURE
+### APP STRUCTURE
 
 controls
 dictionaries
@@ -338,5 +338,5 @@ tasks
 themes
 translations
 MyApplication.js
-index.html -> <div id="root"></div>
-index.js -> new MyApplication().run()
+index.html -> `<div id="root"></div>`
+index.js -> `new MyApplication().run()`
