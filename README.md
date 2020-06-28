@@ -200,7 +200,6 @@ data ans state are not observable and call 'notify' on their view
 			<Set property="state.status" value="PENDING"/>
 			<Run name="FetchSomething">
 				<Params>
-				<!-- Only primitives and arrays of primitives are allowed. Objects should be flattened as separate Param -->
 					<Param name="items" value="{data.items}"/>
 					<Param name="selected" value="{data.selected}"/>
 					<Param name="result" value="{state.result}"/>
@@ -250,7 +249,7 @@ Everything else will be passed into a control and used by the control internally
 			remove.text={texts.remove}
 			added={handleAdded}
 			removed={handleRemoved}
-			/*templates below implement at the end*/
+			/*templates below implement in the beginning*/
 			add.template="CustomAddButton"
 			to.ListItem.template="CustomListItem"
 		/>
@@ -260,13 +259,13 @@ Everything else will be passed into a control and used by the control internally
 CustomFromToList.view
 <View>
 	<div>
-		<List-from />
-		<Button-add click={handleAddClick} />
+		<List name="from" />
+		<Button name="add" click={handleAddClick} />
 		<Splitter>
 			<div>---------</div>
 		</Splitter>
-		<Button-remove click={handleRemoveClick} />
-		<List-to />
+		<Button name="remove" click={handleRemoveClick} />
+		<List name="to" />
 	</div>
 how to auto-spread properties to elements
 </View>
@@ -276,8 +275,8 @@ For:
 ```
 <div>
 	<Button value={1} text="Press me"/>
-	<Tabs-users prop1={value1} prop2={value2} prop3={value3}>
-		/*these templates implement at the beginning*/
+	<Tabs name="users" prop1={value1} prop2={value2} prop3={value3}>
+		/*these templates implement at the end*/
 		<Header.template> <!--[name] for specific instance or View name for all instances-->
 			<div>
 				<Checkbox ... />
@@ -297,9 +296,9 @@ For:
 			<children … />
 			<div>---------</div>
 		<template>
-		<For-tabs>
+		<For name="tabs">
 			<Tab>
-				<Button-go/>
+				<Button name="go"/>
 			</Tab>
 		</For-tabs>
 	</Tabs>
@@ -330,13 +329,25 @@ HttpService - provides many scenarios with requests:
 ### APP STRUCTURE
 
 controls
+
 dictionaries
+
 pages
+
 partials
+
 services
+
 tasks
+
+templates
+
 themes
+
 translations
+
 MyApplication.js
+
 index.html -> `<div id="root"></div>`
+
 index.js -> `new MyApplication().run()`
