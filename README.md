@@ -109,7 +109,7 @@ Compiled into:
 
 ### STYLES (MERGEABLE, EXTENDABLE)
 
-Style is applied as class="auto generated classes" to the root native html elements only  i.e.:
+Style is applied as class="auto generated classes" to the root native html elements only i.e.:
 ```
 <div class="auto generated classes">
 	<button/>
@@ -117,17 +117,21 @@ Style is applied as class="auto generated classes" to the root native html eleme
 	<button/>
 </div>
 ```
+
 OR
+
 ```
 <li class="auto generated classes">one</li>
 <li class="auto generated classes">two</li>
 <li class="auto generated classes">three</li>
 ```
+
 MyView.style
 MyView.brand1.style
 MyView.en-US.brand1.style
 
 MyView.style:
+
 ```
 <Style extends="MyBaseView">
 	<border-color value="#aaa" />
@@ -139,6 +143,7 @@ MyView.style:
 ```
 
 Compiled into:
+
 ```
 {
 	"extends": "MyBaseView",
@@ -150,6 +155,7 @@ Compiled into:
 ```
 
 Style.js:
+
 ```
 class Style extends Resource {
 	parse(definition) {
@@ -168,12 +174,12 @@ class Style extends Resource {
 }
 ```
 
-### VIEWS (EXTENDABLE)
+### VIEWS
 
 data ans state are not observable and call 'notify' on their view
 
 ```
-<Page> <!-- Only page can run tasks -->
+<Page>
 …
 </Page>
 
@@ -182,39 +188,47 @@ data ans state are not observable and call 'notify' on their view
 </Partial>
 
 <Control as="FromToList">
-	<!--Only workflows for this view are used here, not for children-->
-	<OnChange property="data.status">
-		<Set></Set>
-	</OnChange>
-	<OnEvent>
-		<!--Task is allowed-->
-	</OnEvent>
 	<FromToList name="roleSelector"
 		from.items="{data.items}"
 		to.items="{data.selected}"
 		add.text="{texts.add}"
 		remove.text="{texts.remove}"
 		add.template="CustomAddButton" <!--later-->
-		to.ListItem.template="CustomListItem"> <!--later-->
-		<OnEvent name="add.clicked">
-			<Set property="state.status" value="PENDING"/>
-			<Run name="FetchSomething">
-				<Params>
-					<Param name="items" value="{data.items}"/>
-					<Param name="selected" value="{data.selected}"/>
-					<Param name="result" value="{state.result}"/>
-				</Params>
-				<OnSuccess>
-					<Set></Set>
-					<!--Task is not allowed-->
-				</OnSuccess>
-				<OnFail>
-					<Set></Set>
-					<!--Task is not allowed-->
-				</OnFail>
-			</Run>
-		</OnEvent>
+		to.ListItem.template="CustomListItem"<!--later-->
 	</FromToList>
+  
+  <OnEvent name="SomeEvent">
+  	<Set />
+    <Raise />
+    <Run></Run>
+  </OnEvent>
+
+	<OnEvent name="roleSelector.SomeEvent">
+    <Set target="data.prop1" value="{state.prop2}" />
+    <Raise event="SomeEvent" prop1="{data.prop1}" prop2="{state.prop2}" />
+    <Run task="FetchSomething" prop1="data.prop1" prop2="{state.prop2}" />
+			<OnSuccess>
+				<Set />
+				<Raise />
+			</OnSuccess>
+			<OnFail>
+				<Set />
+				<Raise />
+			</OnFail>
+    </Run>
+	</OnEvent>
+
+	<OnChange property="roleSelector.add.text">
+		<Set />
+    <Raise />
+    <Run></Run>
+	</OnChange>
+  
+  <OnChange property="data.prop1">
+		<Set />
+    <Raise />
+    <Run></Run>
+	</OnChange>
 </View>
 ```
 
@@ -328,23 +342,21 @@ HttpService - provides many scenarios with requests:
 
 ### APP STRUCTURE
 
-controls
+Controls
 
-dictionaries
+Pages
 
-pages
+Partials
 
-partials
+Services
 
-services
+Styles
 
-tasks
+Tasks
 
-templates
+Templates
 
-themes
-
-translations
+Themes
 
 MyApplication.js
 
