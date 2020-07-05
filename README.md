@@ -183,12 +183,13 @@ data ans state are not observable and call 'notify' on their view
 …
 </Page>
 
-<Partial>
+<Partial as="UserForm">
 …
 </Partial>
 
 <Control as="FromToList">
 	<FromToList name="roleSelector"
+    if="{data.isRendered}" <!-- all controls, views and screens have "if" -->
 		from.items="{data.items}"
 		to.items="{data.selected}"
 		add.text="{texts.add}"
@@ -203,7 +204,7 @@ data ans state are not observable and call 'notify' on their view
     <Run></Run>
   </OnEvent>
 
-	<OnEvent name="roleSelector.SomeEvent">
+	<OnEvent name="roleSelector.add.SomeEvent">
     <Set target="data.prop1" value="{state.prop2}" />
     <Raise event="SomeEvent" prop1="{data.prop1}" prop2="{state.prop2}" />
     <Run task="FetchSomething" prop1="data.prop1" prop2="{state.prop2}" />
@@ -218,13 +219,7 @@ data ans state are not observable and call 'notify' on their view
     </Run>
 	</OnEvent>
 
-	<OnChange property="roleSelector.add.text">
-		<Set />
-    <Raise />
-    <Run></Run>
-	</OnChange>
-  
-  <OnChange property="data.prop1">
+	<OnChange target="roleSelector.add.text">
 		<Set />
     <Raise />
     <Run></Run>
@@ -238,51 +233,14 @@ FromToList.brand1.en.view
 
 FromToList.view:
 ```
-<Partial>
+<Control>
 	<div>
 		<List name="from" />
 		<Button name="add" />
 		<Button name="remove" />
 		<List name="to" />
 	</div>
-</Partial>
-```
-
-name:
-`<[name].template>` will be handled specially
-Everything else will be passed into a control and used by the control internally as <children>
-```
-<!--Deep events and deep properties are defined relatively to an element they're defined on-->
-<!--They start deep searching from an element where they're defined-->
-<View>
-	<Panel Button.clicked={handleClicked} /*deep event*/>
-		<FromToList
-			from.items={model.items}
-			to.items={model.result}
-			add.text={texts.add} /*deep property*/
-			remove.text={texts.remove}
-			added={handleAdded}
-			removed={handleRemoved}
-			/*templates below implement in the beginning*/
-			add.template="CustomAddButton"
-			to.ListItem.template="CustomListItem"
-		/>
-	</Panel>
-</View>
-
-CustomFromToList.view
-<View>
-	<div>
-		<List name="from" />
-		<Button name="add" click={handleAddClick} />
-		<Splitter>
-			<div>---------</div>
-		</Splitter>
-		<Button name="remove" click={handleRemoveClick} />
-		<List name="to" />
-	</div>
-how to auto-spread properties to elements
-</View>
+</Control>
 ```
 
 For:
@@ -319,18 +277,6 @@ For:
 </div>
 ```
 
-Switch:
-```
-<Switch name="someItems" by="id" OR by={id}>
-	<Case value="{data.someValue}">
-	</Case>
-	<Case value="123">
-	</Case>
-	<Default>
-	</Default>
-</Switch>
-```
-
 ### SERVICES
 HttpService - provides many scenarios with requests:
 - like sequential requests
@@ -344,19 +290,19 @@ HttpService - provides many scenarios with requests:
 
 Controls
 
+Fragments
+
 Pages
 
-Partials
-
 Services
+
+Skins
 
 Styles
 
 Tasks
 
 Templates
-
-Themes
 
 MyApplication.js
 
