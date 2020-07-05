@@ -189,7 +189,8 @@ data ans state are not observable and call 'notify' on their view
 
 <Control as="FromToList">
 	<FromToList name="roleSelector"
-    if="{data.isRendered}" <!-- all views have "if" -->
+                isDisplayed="{state.prop1}"
+                isVisible="{data.prop1}"
 		from.items="{data.items}"
 		to.items="{data.selected}"
 		add.text="{texts.add}"
@@ -243,7 +244,14 @@ FromToList.view:
 </Control>
 ```
 
+Switch:
+
+```
+TODO
+```
+
 For:
+
 ```
 <div>
 	<Button value={1} text="Press me"/>
