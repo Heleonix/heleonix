@@ -189,7 +189,7 @@ data ans state are not observable and call 'notify' on their view
 
 <Control as="FromToList">
 	<FromToList name="roleSelector"
-    if="{data.isRendered}" <!-- all controls, views and screens have "if" -->
+    if="{data.isRendered}" <!-- all views have "if" -->
 		from.items="{data.items}"
 		to.items="{data.selected}"
 		add.text="{texts.add}"
@@ -301,8 +301,6 @@ Skins
 Styles
 
 Tasks
-
-Templates
 
 MyApplication.js
 
