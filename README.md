@@ -298,9 +298,15 @@ HttpService - provides many scenarios with requests:
 
 Controls
 
+Converters
+
+Dictionaries
+
 Fragments
 
 Pages
+
+Providers
 
 Services
 
@@ -309,6 +315,8 @@ Skins
 Styles
 
 Tasks
+
+Texts
 
 MyApplication.js
 
