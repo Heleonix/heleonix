@@ -188,7 +188,8 @@ data ans state are not observable and call 'notify' on their view
 </Partial>
 
 <Control as="FromToList">
-	<FromToList name="roleSelector"
+    <Content>
+        <FromToList name="roleSelector"
                 isDisplayed="{state.prop1}"
                 isVisible="{data.prop1}"
 		from.items="{data.items}"
@@ -197,34 +198,34 @@ data ans state are not observable and call 'notify' on their view
 		remove.text="{texts.remove}"
 		add.template="CustomAddButton" <!--later-->
 		to.ListItem.template="CustomListItem"<!--later-->
-	</FromToList>
-  
-  <OnEvent name="SomeEvent">
-  	<Set />
-    <Raise />
-    <Run></Run>
-  </OnEvent>
-
-	<OnEvent name="roleSelector.add.SomeEvent">
-    <Set target="data.prop1" value="{state.prop2}" />
-    <Raise event="SomeEvent" prop1="{data.prop1}" prop2="{state.prop2}" />
-    <Run task="FetchSomething" prop1="data.prop1" prop2="{state.prop2}" />
-			<OnSuccess>
-				<Set />
-				<Raise />
-			</OnSuccess>
-			<OnFail>
-				<Set />
-				<Raise />
-			</OnFail>
-    </Run>
-	</OnEvent>
-
-	<OnChange target="roleSelector.add.text">
-		<Set />
-    <Raise />
-    <Run></Run>
-	</OnChange>
+        </FromToList>
+    </Content>
+    <Workflow>
+        <OnEvent name="SomeEvent">
+    	    <Set />
+            <Raise />
+            <Run></Run>
+        </OnEvent>
+        <OnEvent name="roleSelector.add.SomeEvent">
+            <Set target="data.prop1" value="{state.prop2}" />
+            <Raise event="SomeEvent" prop1="{data.prop1}" prop2="{state.prop2}" />
+            <Run task="FetchSomething" prop1="{data.prop1}" prop2="{state.prop2}" />
+                <OnSuccess>
+                    <Set />
+                    <Raise />
+                </OnSuccess>
+                <OnFail>
+                    <Set />
+                    <Raise />
+                </OnFail>
+            </Run>
+        </OnEvent>
+        <OnChange target="roleSelector.add.text">
+            <Set />
+            <Raise />
+            <Run></Run>
+        </OnChange>
+    </Workflow>
 </View>
 ```
 
@@ -315,8 +316,6 @@ Skins
 Styles
 
 Tasks
-
-Texts
 
 MyApplication.js
 
