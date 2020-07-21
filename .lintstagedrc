@@ -1,7 +1,7 @@
 {
   "concurrent": false,
   "linters": {
-    "*.{js,json}": [
+    "*.{js,ts,json}": [
       "eslint --fix",
       "git add"
     ]

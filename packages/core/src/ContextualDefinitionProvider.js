@@ -1,6 +1,6 @@
 import { Symbols } from './Symbols';
-import { DefinitionGettingError } from '../errors/DefinitionGettingError';
-import { NotImplementedError } from '../errors/NotImplementedError';
+import { DefinitionGettingError } from './errors/DefinitionGettingError';
+import { NotImplementedError } from './errors/NotImplementedError';
 import { DefinitionProvider } from './DefinitionProvider';
 
 export class ContextualDefinitionProvider extends DefinitionProvider {

@@ -1,52 +1,52 @@
 # Heleonix
 
-Strict and declarative MVVM framework for web sites and web applications.
+Flexible declarative framework for web sites and web applications.
 
 ## Install
 
 ## TODO
 
 ### IMPLEMENT
-	- @heleonix/testing wrapped mocks, auto deep mocks, auto shallow mocks, manual mocks
-		○ @heleonix/testing-jasmine
-		○ @heleonix/testing-jest
-	- Store full path to each view being rendered in the presenter and pass it to an exception if any
-	- Review all implementation and implement validation functions which throw exceptions for all components and all cases
-	- Use Object.is to compare values in setters of data, property, state decorators
 
-### BINDINGS
-
-```
-class Binding {
-	source
-	target
-  sourceItem
-  targetItem
-	observe(sender, args) {}
-}
-
-class PropertyBinding extends Binding {
-}
-```
+    - @heleonix/testing wrapped mocks, auto deep mocks, auto shallow mocks, manual mocks
+        ○ @heleonix/testing-jasmine
+        ○ @heleonix/testing-jest
+    - Store full path to each view being rendered in the presenter and pass it to an exception if any
+    - Review all implementation and implement validation functions which throw exceptions for all components and all cases
+    - Use Object.is to compare values in setters of data, property, state decorators
 
 ### CONTEXT
 
 Context is an object with string values, which splits resources of applications:
 
-```
+```javascript
 {
-	env: 'dev' // Least specific
-	brand: 'brand1',
-	culture: 'uk-UK', // Most specific
+    env: 'dev',
+    brand: 'brand1',
+    culture: 'uk-UK'
 }
 ```
 
 In webpack plugins context is specified as below:
+
+```javascript
 [
-	env: ["dev", "test", "prod"],
-	brand: ["brand1", "brand2", "brand3"],
-	culture: ["en-US", "uk-UK"]
-]
+    // Least specific
+    {
+        name: "env",
+        values: ["dev", "test", "prod"],
+    },
+    {
+        name: "brand",
+        values: ["brand1", "brand2", "brand3"],
+    },
+    {
+        name: "culture",
+        values: ["en-US", "uk-UK"],
+    },
+    // MOst specific
+];
+```
 
 Context-specific files are named in format:
 
@@ -64,27 +64,27 @@ Buttons.es-ES.brand1.dic
 
 Buttons.en-US.dic:
 
-```
+```xml
 <Dictionary>
-	<Add>Add</Add>
-	<Remove>Remove</Remove>
-	<Ok>OK {usertitle}</Ok>
-	// for this message you must provide params: username, usertitle
-	<OkOrCancel>
-		Hi {username}! Are you {.Ok} or {BaseControls.Cancel}?
-	</OkOrCancel>
+    <Add>Add</Add>
+    <Remove>Remove</Remove>
+    <Ok>OK {usertitle}</Ok>
+    <!--for this message you must provide params: username, usertitle-->
+    <OkOrCancel>
+        Hi {username}! Are you {.Ok} or {@BaseControls.Cancel}?
+    </OkOrCancel>
 </Dictionary>
 ```
 
 Compiled into:
 
-```
+```javascript
 {
 	items: {
 		"Add": "Add",
 		"Remove": "Remove",
 		"Ok": "OK {usertitle}",
-		"OkOrCancel": "Hi {username}! Do you {.Ok} or {BaseControls.Cancel}?"
+		"OkOrCancel": "Hi {username}! Are you {.Ok} or {#BaseControls.Cancel}?"
 	}
 }
 ```
@@ -109,18 +109,19 @@ Compiled into:
 
 ### STYLES (MERGEABLE, EXTENDABLE)
 
-Style is applied as class="auto generated classes" to the root native html elements only i.e.:
-```
+Skin is applied as class="auto generated classes" to the root native html elements only i.e.:
+
+```xml
 <div class="auto generated classes">
-	<button/>
-	<button/>
-	<button/>
+	<button />
+	<button />
+	<button />
 </div>
 ```
 
 OR
 
-```
+```xml
 <li class="auto generated classes">one</li>
 <li class="auto generated classes">two</li>
 <li class="auto generated classes">three</li>
@@ -132,7 +133,7 @@ MyView.en-US.brand1.style
 
 MyView.style:
 
-```
+```xml
 <Style extends="MyBaseView">
 	<border-color value="#aaa" />
   <width>
@@ -144,7 +145,7 @@ MyView.style:
 
 Compiled into:
 
-```
+```javascript
 {
 	"extends": "MyBaseView",
 	"items": {
@@ -156,7 +157,7 @@ Compiled into:
 
 Style.js:
 
-```
+```javascript
 class Style extends Resource {
 	parse(definition) {
 		// Parses definition and extracts static part and dynamic part (typeof function)
@@ -174,29 +175,38 @@ class Style extends Resource {
 }
 ```
 
-### VIEWS
+### THEMES
 
-data ans state are not observable and call 'notify' on their view
+TBD
 
-```
-<Page>
-…
-</Page>
+### CONTROLS
 
-<Partial as="UserForm">
-…
-</Partial>
-
+```xml
 <Control as="FromToList">
-    <FromToList name="roleSelector"
-                isDisplayed="{state.prop1}"
-                isVisible="{data.prop1}"
-                from.items="{data.items}"
-                to.items="{data.selected}"
-                add.text="{texts.add}"
-                remove.text="{texts.remove}"
-                add.template="CustomAddButton" <!--later-->
-                to.ListItem.template="CustomListItem"<!--later-->
+    <FromToList
+        name="roleSelector"
+        isDisplayed=".state1"
+        isVisible="=shouldDisplay"
+        from.items="=items"
+        to.items=".selected"
+        add.text="@Buttons.add | sex"
+        add.extraValue="1"
+        remove.text="@Buttons.remove"
+        add.template="#Buttons.CustomAddButton"
+        to.ListItem.template="CustomListItem"
+    >
+          <template for="add">
+            <div>
+                <content />
+                <!--Useful for wrapping only-->
+            </div>
+            OR
+            <!--Fully custom template, but not workflow-->
+            <button name="btn" value="=extraValue">
+                <!--Other data are automatically added -->
+                <Children />
+            </button>
+        </template>
     </FromToList>
 
     <OnEvent name="SomeEvent">
@@ -205,9 +215,9 @@ data ans state are not observable and call 'notify' on their view
         <Run></Run>
     </OnEvent>
     <OnEvent name="roleSelector.add.SomeEvent">
-        <Set target="data.prop1" value="{state.prop2}" />
-        <Raise event="SomeEvent" prop1="{data.prop1}" prop2="{state.prop2}" />
-        <Run task="FetchSomething" prop1="{data.prop1}" prop2="{state.prop2}" />
+        <Set target="=prop1" value=".prop2" />
+        <Raise event="SomeEvent" prop1="=prop1" prop2=".prop2" />
+        <Run task="FetchSomething" prop1="=prop1" prop2=".prop2">
             <OnSuccess>
                 <Set />
                 <Raise />
@@ -231,7 +241,8 @@ FromToList.brand1.view
 FromToList.brand1.en.view
 
 FromToList.view:
-```
+
+```xml
 <Control>
 	<div>
 		<List name="from" />
@@ -244,16 +255,16 @@ FromToList.view:
 
 Switch:
 
-```
+```xml
 TODO
 ```
 
 For:
 
-```
+```xml
 <div>
 	<Button value={1} text="Press me"/>
-	<Tabs name="users" prop1={value1} prop2={value2} prop3={value3}>
+	<Tabs name="users" prop1="{value1}" prop2={value2} prop3={value3}>
 		/*these templates implement at the end*/
 		<Header.template> <!--[name] for specific instance or View name for all instances-->
 			<div>
@@ -284,37 +295,48 @@ For:
 ```
 
 ### SERVICES
+
+Can inject another serices.
+
 HttpService - provides many scenarios with requests:
-- like sequential requests
-- parallel requests
-- polling with intervals and specified number of retries
-- optimistic updates with pending statuses
-- etc
-- Returns an empty object with internal promise, so it can be bound to a view, so when promise is resolved, the empty object is populated with data and model is updated and view is refreshed.
 
-### APP STRUCTURE
+-   like sequential requests
+-   parallel requests
+-   polling with intervals and specified number of retries
+-   optimistic updates with pending statuses
+-   etc
+-   Returns an empty object with internal promise, so it can be bound to a view, so when promise is resolved, the empty object is populated with data and model is updated and view is refreshed.
 
-Controls
+### CONVERTERS
 
-Converters
+classes with "format" and "parse" functions. Can inject dictionaries.
 
-Dictionaries
+### TASKS
 
-Fragments
+have "run" function and any number of properties. Can inject services and settings.
 
-Pages
+### SETTINGS (MERGEABLE)
 
-Providers
+Key/Value pairs like dictionaries but with values of any JSON type and they cannot have replacement parameters and references to other keys or settings.
 
-Services
+### PROVIDERS
 
-Skins
+Provide dictionary definitions, control definitions, style definitions, theme definitions, settings definitions.
+Can inject services and settings.
 
-Styles
+### APPLICATION
 
-Tasks
+class Application {
+    static get dictionaryDefinitionProvider() {}
+    static get styleDefinitionProvider() {}
+    static get themeDefinitionProvider() {}
+    static get controlDefinitionProvider() {}
+    static get settingsDefinitionProvider() {}
 
-MyApplication.js
+    static get tasks() {}
+    static get converters() {}
+    static get services() {}
+}
 
 index.html -> `<div id="root"></div>`
 

@@ -1,25 +1,25 @@
 {
-  "name": "@heleonix/controls",
-  "version": "1.0.0",
-  "main": "dist/index.cjs.js",
-  "module": "dist/index.esm.js",
-  "unpkg": "dist/index.umd.min.js",
-  "description": "Set of controls for the Heleonix framework.",
-  "author": "Heleonix - Hennadii Lutsyshyn",
-  "license": "MIT",
-  "homepage": "https://github.com/Heleonix/heleonix",
-  "bugs": "https://github.com/Heleonix/heleonix/issues",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Heleonix/heleonix.git",
-    "directory": "packages/controls"
-  },
-  "keywords": [],
-  "sideEffects": false,
-  "publishConfig": {
-    "access": "public"
-  },
-  "dependencies": {
-    "@babel/runtime-corejs3": "7.5.5"
-  }
+    "name": "@heleonix/controls",
+    "version": "1.0.0",
+    "main": "dist/index.cjs.js",
+    "module": "dist/index.esm.js",
+    "browser": "dist/index.umd.js",
+    "unpkg": "dist/index.umd.js",
+    "types": "dist/index",
+    "description": "Set of controls for the Heleonix framework.",
+    "author": "Heleonix - Hennadii Lutsyshyn",
+    "license": "MIT",
+    "homepage": "https://github.com/Heleonix/heleonix",
+    "bugs": "https://github.com/Heleonix/heleonix/issues",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Heleonix/heleonix.git",
+        "directory": "packages/controls"
+    },
+    "keywords": [],
+    "sideEffects": false,
+    "publishConfig": {
+        "access": "public"
+    },
+    "dependencies": {}
 }
