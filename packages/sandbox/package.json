@@ -8,6 +8,7 @@
         "@heleonix/controls": "*",
         "@heleonix/core": "*",
         "@heleonix/http": "*",
-        "@heleonix/router": "*"
+        "@heleonix/router": "*",
+        "@babel/runtime-corejs3": "^7.10.5"
     }
 }

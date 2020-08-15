@@ -9,12 +9,12 @@ function assertIsInjectable(componentName: string, injector: Injector): void {
     }
 }
 
-export class Injectable {
-    public readonly [Symbols.DIContainer]: DIContainer;
+export abstract class Injectable {
+    public [Symbols.DIContainer]: DIContainer;
 
-    constructor(injector: Injector) {
-        assertIsInjectable(this.constructor.name, injector);
+    public constructor(injector: unknown) {
+        assertIsInjectable(this.constructor.name, injector as Injector);
 
-        this[Symbols.DIContainer] = injector[Symbols.DIContainer];
+        this[Symbols.DIContainer] = (injector as Injector)[Symbols.DIContainer];
     }
 }

@@ -1,5 +1,5 @@
-export class HeleonixError extends Error {
-    constructor(message: string, ...rest: string[]) {
+export abstract class HeleonixError extends Error {
+    public constructor(message: string, ...rest: string[]) {
         const formattedMsg = HeleonixError.formatMessage(message, ...rest);
 
         super(formattedMsg);

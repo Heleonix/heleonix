@@ -1,75 +1,69 @@
-import * as Symbols from "../Symbols";
-import { UnknownComponentError } from "../../UnknownComponentError";
-import { InjectionNotAllowedError } from "../../InjectionNotAllowedError";
 import { Injector } from "./Injector";
 import { Injectable } from "./Injectable";
+import { Rule } from "./Rule";
+import { UnknownComponentError } from "./../errors/UnknownComponentError";
+import { InjectionNotAllowedError } from "./../errors/InjectionNotAllowedError";
+import { Symbols } from "./../Symbols";
 
-declare type ComponentList = { [index: string]: Injectable };
-
-function assertComponentIsProvided(components, injectingName) {
-    if (!components[injectingName]) {
-        throw new UnknownComponentError(injectingName);
+function assertComponentIsProvided(componentName: string | symbol, component: typeof Injectable | undefined) {
+    if (!component) {
+        throw new UnknownComponentError(componentName.toString());
     }
 }
 
-function assertInjectionIsAllowed(component, hostInstance, rules) {
-    const canInject = rules.some(
-        (r) =>
-            (component === r.component || component.prototype instanceof r.component) &&
-            r.allowedHosts &&
-            r.allowedHosts.some((ah) => hostInstance instanceof ah),
-    );
+function assertRuleIsProvided(componentName: string | symbol, rule: Rule | undefined) {
+    if (!rule) {
+        throw new UnknownComponentError(componentName.toString());
+    }
+}
 
-    if (!canInject) {
-        throw new InjectionNotAllowedError(component.name, hostInstance.constructor.name);
+function assertInjectionIsAllowed(componentName: string | symbol, hostInstance: Injectable, rule: Rule) {
+    if (!rule.allowedHosts.some((allwedHost) => hostInstance instanceof allwedHost)) {
+        throw new InjectionNotAllowedError(componentName.toString(), hostInstance.constructor.name);
     }
 }
 
 export class DIContainer {
-    private readonly components: { [index: string]: Injectable };
-
-    private readonly rules: Array<{ component: Injectable; allowedHosts: Injectable[] }>;
-
-    private readonly instances = new Map();
+    private readonly instances = new Map<string | symbol, Injectable>();
 
     private readonly injector = new Injector(this);
 
-    constructor(
-        components: { [index: string]: Injectable },
-        rules: Array<{ component: Injectable; allowedHosts: Injectable[] }>,
-    ) {
-        this.components = { ...components };
+    private readonly components = new Map<string | symbol, typeof Injectable>();
 
-        this.rules = rules.map((rule) => ({ ...rule, allowedHosts: [...rule.allowedHosts] }));
+    public constructor(components: { [index: string]: typeof Injectable }, private readonly rules: Rule[]) {
+        for (const key in components) {
+            this.components.set(key, components[key]);
+        }
     }
 
-    getInstance(propertyName: string, hostInstance: Injectable) {
-        if (!this.instances.has(propertyName)) {
-            assertComponentIsProvided(this.components, propertyName);
+    public init(root: Injectable): void {
+        root[Symbols.DIContainer] = this;
+    }
 
-            const Component = this.#components[propertyName];
-
-            const instance = new Component(this.#injector);
-
-            this.#instances.set(propertyName, instance);
+    public inject<TInjectable extends Injectable>(
+        componentName: string | symbol,
+        hostInstance: Injectable,
+    ): TInjectable {
+        if (this.instances.has(componentName)) {
+            return this.instances.get(componentName) as TInjectable;
         }
 
-        const instance = this.#instances.get(propertyName);
+        const component = this.components.get(componentName) as { new (injector: Injector): Injectable };
 
-        assertInjectionIsAllowed(instance.constructor, hostInstance, this.#rules);
+        assertComponentIsProvided(componentName, component);
 
-        return instance;
-    }
+        const rule = this.rules.find((rule) => component instanceof rule.component);
 
-    createInstance(propertyName, hostInstance) {
-        assertComponentIsProvided(this.#components, propertyName);
+        assertRuleIsProvided(componentName, rule);
 
-        const Component = this.#components[propertyName];
+        assertInjectionIsAllowed(componentName, hostInstance, rule as Rule);
 
-        assertInjectionIsAllowed(Component, hostInstance, this.#rules);
+        const instance = new component(this.injector);
 
-        const instance = new Component(this.#injector);
+        if ((rule as Rule).isSingleton) {
+            this.instances.set(componentName, instance);
+        }
 
-        return instance;
+        return instance as TInjectable;
     }
 }

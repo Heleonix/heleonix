@@ -19,32 +19,32 @@ Flexible declarative framework for web sites and web applications.
 
 Context is an object with string values, which splits resources of applications:
 
-```javascript
+```json
 {
-    env: 'dev',
-    brand: 'brand1',
-    culture: 'uk-UK'
+    "env": "dev",
+    "brand": "brand1",
+    "culture": "uk-UK"
 }
 ```
 
 In webpack plugins context is specified as below:
 
-```javascript
+```json
 [
     // Least specific
     {
-        name: "env",
-        values: ["dev", "test", "prod"],
+        "name": "env",
+        "values": ["dev", "test", "prod"],
     },
     {
-        name: "brand",
-        values: ["brand1", "brand2", "brand3"],
+        "name": "brand",
+        "values": ["brand1", "brand2", "brand3"],
     },
     {
-        name: "culture",
-        values: ["en-US", "uk-UK"],
+        "name": "culture",
+        "values": ["en-US", "uk-UK"],
     },
-    // MOst specific
+    // Most specific
 ];
 ```
 
@@ -62,7 +62,7 @@ Buttons.en-US.dic
 Buttons.en-US.brand1.dic
 Buttons.es-ES.brand1.dic
 
-Buttons.en-US.dic:
+Buttons.test.brand2.en-US.dic:
 
 ```xml
 <Dictionary>
@@ -78,38 +78,30 @@ Buttons.en-US.dic:
 
 Compiled into:
 
-```javascript
+```json
 {
-	items: {
-		"Add": "Add",
-		"Remove": "Remove",
-		"Ok": "OK {usertitle}",
-		"OkOrCancel": "Hi {username}! Are you {.Ok} or {#BaseControls.Cancel}?"
-	}
+    "name": "Buttons",
+    "context": {
+        "env": "test",
+        "brand": "brand2",
+        "culture": "en-US"
+    },
+    "items": {
+        "Add": "Add",
+        "Remove": "Remove",
+        "Ok": "OK {usertitle}",
+        "OkOrCancel": "Hi {username}! Are you {.Ok} or {#BaseControls.Cancel}?"
+    }
 }
 ```
 
-BaseControls.en-US.brand1.dic:
+### SETTINGS (MERGEABLE)
 
-```
-<Dictionary>
-	<Cancel>Cancel</Cancel>
-</Dictionary>
-```
-
-Compiled into:
-
-```
-{
-	"items": {
-		"Cancel": "Cancel"
-	}
-}
-```
+Key/Value pairs like dictionaries but with values of any JSON type and they cannot have replacement parameters and references to other keys or settings.
 
 ### STYLES (MERGEABLE, EXTENDABLE)
 
-Skin is applied as class="auto generated classes" to the root native html elements only i.e.:
+Style is applied as class="auto generated classes" to the root native html elements only, i.e.:
 
 ```xml
 <div class="auto generated classes">
@@ -145,7 +137,7 @@ MyView.style:
 
 Compiled into:
 
-```javascript
+```json
 {
 	"extends": "MyBaseView",
 	"items": {
@@ -157,24 +149,6 @@ Compiled into:
 
 Style.js:
 
-```javascript
-class Style extends Resource {
-	parse(definition) {
-		// Parses definition and extracts static part and dynamic part (typeof function)
-		// remembers dynamic part to call it
-	}
-
-	get staticClass() {
-	}
-
-	getDynamicClass(vm) {
-		// runs dynamic class. If output is the same as previous,
-		// returns previous cached value, otherwise generates new
-		// dynamic string, caches it and returns
-	}
-}
-```
-
 ### THEMES
 
 TBD
@@ -183,27 +157,28 @@ TBD
 
 ```xml
 <Control as="FromToList">
-    <FromToList
-        name="roleSelector"
+    <FromToList name="roleSelector"
         isDisplayed=".state1"
-        isVisible="=shouldDisplay"
-        from.items="=items"
+        isVisible="@shouldDisplay"
+        from.items="@items"
         to.items=".selected"
-        add.text="@Buttons.add | sex"
+        add.text="#Buttons.add | sex"
         add.extraValue="1"
-        remove.text="@Buttons.remove"
+        remove.text="#Buttons.remove"
         add.template="#Buttons.CustomAddButton"
-        to.ListItem.template="CustomListItem"
-    >
-          <template for="add">
+        to.ListItem.template="CustomListItem">
+        <template for="add">
             <div>
                 <content />
                 <!--Useful for wrapping only-->
             </div>
-            OR
+
+            <!--OR-->
+
             <!--Fully custom template, but not workflow-->
-            <button name="btn" value="=extraValue">
-                <!--Other data are automatically added -->
+            <button name="btn"
+                value="=extraValue">
+                <!--Other data are automatically added-->
                 <Children />
             </button>
         </template>
@@ -215,9 +190,14 @@ TBD
         <Run></Run>
     </OnEvent>
     <OnEvent name="roleSelector.add.SomeEvent">
-        <Set target="=prop1" value=".prop2" />
-        <Raise event="SomeEvent" prop1="=prop1" prop2=".prop2" />
-        <Run task="FetchSomething" prop1="=prop1" prop2=".prop2">
+        <Set target="@prop1"
+            value=".prop2" />
+        <Raise event="SomeEvent"
+            prop1="@prop1"
+            prop2=".prop2" />
+        <Run task="FetchSomething"
+            prop1="@prop1"
+            prop2=".prop2">
             <OnSuccess>
                 <Set />
                 <Raise />
@@ -254,6 +234,12 @@ FromToList.view:
 ```
 
 Switch:
+
+```xml
+TODO
+```
+
+When:
 
 ```xml
 TODO
@@ -309,34 +295,19 @@ HttpService - provides many scenarios with requests:
 
 ### CONVERTERS
 
-classes with "format" and "parse" functions. Can inject dictionaries.
+classes with "format" and "parse", getDictionary(dictionaryName, keyName, ...args) functions.
 
 ### TASKS
 
-have "run" function and any number of properties. Can inject services and settings.
-
-### SETTINGS (MERGEABLE)
-
-Key/Value pairs like dictionaries but with values of any JSON type and they cannot have replacement parameters and references to other keys or settings.
+have "run" function and any number of properties.
+have getSetting(settingName, settingKey) function.
+Can inject services.
 
 ### PROVIDERS
 
 Provide dictionary definitions, control definitions, style definitions, theme definitions, settings definitions.
-Can inject services and settings.
-
-### APPLICATION
-
-class Application {
-    static get dictionaryDefinitionProvider() {}
-    static get styleDefinitionProvider() {}
-    static get themeDefinitionProvider() {}
-    static get controlDefinitionProvider() {}
-    static get settingsDefinitionProvider() {}
-
-    static get tasks() {}
-    static get converters() {}
-    static get services() {}
-}
+Can inject services.
+have getSetting(settingName, settingKey) function.
 
 index.html -> `<div id="root"></div>`
 

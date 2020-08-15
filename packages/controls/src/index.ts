@@ -1,1 +1,5 @@
-export { Test } from "./Test";
+const s = Symbol("s");
+
+export class Cls {
+    protected [s] = 1;
+}

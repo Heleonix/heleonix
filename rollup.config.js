@@ -6,6 +6,7 @@ import nodeResolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 import replace from "@rollup/plugin-replace";
 import typescript2 from "rollup-plugin-typescript2";
+import babel from "@rollup/plugin-babel";
 import { terser } from "rollup-plugin-terser";
 
 // module => Module
@@ -33,7 +34,11 @@ const EXTERNALS = [
     ...Object.keys(PACKAGE_JSON.dependencies || {}),
     ...Object.keys(PACKAGE_JSON.peerDependencies || {}),
 ];
-const GLOBALS = EXTERNALS.reduce((result, val) => ({ ...result, [val]: getModuleNameFromModuleId(val) }), {});
+const GLOBALS = [...Object.keys(PACKAGE_JSON.peerDependencies || {})].reduce(
+    (result, val) => ({ ...result, [val]: getModuleNameFromModuleId(val) }),
+    {},
+);
+
 const isExternal = (id) => EXTERNALS.some((item) => id.startsWith(item));
 
 export default [
@@ -46,10 +51,17 @@ export default [
         },
         external: isExternal,
         plugins: [
+            nodeResolve(),
+            commonjs(),
             typescript2({
                 typescript: require("typescript"),
                 tsconfig: "../../tsconfig.json",
                 tsconfigOverride: TS_CONFIG_OVERRIDE,
+            }),
+            babel({
+                configFile: "../../babel.config.json",
+                extensions: [".ts"],
+                babelHelpers: "runtime",
             }),
         ],
     },
@@ -62,10 +74,17 @@ export default [
         },
         external: isExternal,
         plugins: [
+            nodeResolve(),
+            commonjs(),
             typescript2({
                 typescript: require("typescript"),
                 tsconfig: "../../tsconfig.json",
                 tsconfigOverride: TS_CONFIG_OVERRIDE,
+            }),
+            babel({
+                configFile: "../../babel.config.json",
+                extensions: [".ts"],
+                babelHelpers: "runtime",
             }),
         ],
     },
@@ -82,12 +101,17 @@ export default [
         },
         plugins: [
             nodeResolve(),
+            commonjs(),
             typescript2({
                 typescript: require("typescript"),
                 tsconfig: "../../tsconfig.json",
                 tsconfigOverride: TS_CONFIG_OVERRIDE,
             }),
-            commonjs({ include: /node_modules/ }),
+            babel({
+                configFile: "../../babel.config.json",
+                extensions: [".ts"],
+                babelHelpers: "runtime",
+            }),
             replace({ "process.env.NODE_ENV": JSON.stringify("production") }),
             terser(),
         ],

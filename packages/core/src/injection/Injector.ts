@@ -4,7 +4,7 @@ import { DIContainer } from "./DIContainer";
 export class Injector {
     public readonly [Symbols.DIContainer]: DIContainer;
 
-    constructor(diContainer: DIContainer) {
+    public constructor(diContainer: DIContainer) {
         this[Symbols.DIContainer] = diContainer;
     }
 }
