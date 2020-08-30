@@ -95,6 +95,10 @@ Compiled into:
 }
 ```
 
+Have methods:
+- setup(definition), like controls
+- getValue(key, args)
+
 ### SETTINGS (MERGEABLE)
 
 Key/Value pairs like dictionaries but with values of any JSON type and they cannot have replacement parameters and references to other keys or settings.
