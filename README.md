@@ -253,8 +253,8 @@ For:
 
 ```xml
 <div>
-	<Button value={1} text="Press me"/>
-	<Tabs name="users" prop1="{value1}" prop2={value2} prop3={value3}>
+	<Button value="1" text="Press me"/>
+	<Tabs name="users" prop1="{value1}" prop2="{value2}" prop3="{value3}">
 		/*these templates implement at the end*/
 		<Header.template> <!--[name] for specific instance or View name for all instances-->
 			<div>
