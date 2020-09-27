@@ -168,10 +168,15 @@ TBD
         from.items="@items"
         to.items=".selected"
         add.text="#Buttons.add | sex"
-        extraValue="1"
         remove.text="#Buttons.remove"
+        remove.text.onChanging="activity2"
+        remove.text.onChanged="activity3"
+        add.onClicked="activity1"
 
-        add.clicked="behavior1"
+        extraValue="1"
+
+        onAdded="activity3"
+        onRemoved="activity4"
 
         add.template="#Buttons.CustomAddButton">
         <Template for="add">
@@ -186,7 +191,12 @@ TBD
             <div name="add" value="@extraValue">@text</div>
         </Template>
     </FromToList>
-    <Behavior name="behavior1">
+    <OnChange target="@prop1" activity="activity31" />
+    <OnChange target=".state1" activity="activity31" />
+    <OnEvent name="myCustomEvent" activity="activity32" />
+    </OnChange>
+    <Activity name="activity1">
+        <Set />
         <Set target="@prop1"
              value=".state1" />
         <Raise event="SomeEvent"
@@ -194,22 +204,18 @@ TBD
                prop2=".state1" />
         <Run task="FetchSomething"
              prop1="@prop1"
-             prop2=".state1">
+             prop2=".state1"
+             prop3="add.text">
              <OnSuccess>
                 <Set />
                 <Raise />
             </OnSuccess>
             <OnFail>
-                <Set />
+                <Set target="add.text" value="remove.text"/>
                 <Raise />
             </OnFail>
         </Run>
-        <OnChange target="roleSelector.add.text">
-            <Set />
-            <Raise />
-            <Run></Run>
-        </OnChange>
-    </Behavior>
+    </Activity>
 </Control>
 ```
 
