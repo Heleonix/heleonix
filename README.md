@@ -192,28 +192,19 @@ TBD
         </Template>
     </FromToList>
     <OnChange target="@prop1" activity="activity31" />
-    <OnChange target=".state1" activity="activity31" />
-    <OnEvent name="myCustomEvent" activity="activity32" />
+    <OnChange target=".state1" activity="activity32" />
+    <OnEvent name="onSomeEvent" activity="activity33" />
     </OnChange>
     <Activity name="activity1">
-        <Set />
-        <Set target="@prop1"
-             value=".state1" />
-        <Raise event="SomeEvent"
+        <Set target="add.text" value="remove.text" />
+        <Set target="@prop1" value=".state1" />
+        <Raise event="onSomeEvent"
                prop1="@prop1"
                prop2=".state1" />
         <Run task="FetchSomething"
              prop1="@prop1"
              prop2=".state1"
-             prop3="add.text">
-             <OnSuccess>
-                <Set />
-                <Raise />
-            </OnSuccess>
-            <OnFail>
-                <Set target="add.text" value="remove.text"/>
-                <Raise />
-            </OnFail>
+             prop3="add.text" />
         </Run>
     </Activity>
 </Control>
