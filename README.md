@@ -191,10 +191,11 @@ TBD
             <div name="add" value="@extraValue">@text</div>
         </Template>
     </FromToList>
+
     <OnChange target="@prop1" activity="activity31" />
     <OnChange target=".state1" activity="activity32" />
     <OnEvent name="onSomeEvent" activity="activity33" />
-    </OnChange>
+
     <Activity name="activity1">
         <Set target="add.text" value="remove.text" />
         <Set target="@prop1" value=".state1" />
