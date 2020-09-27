@@ -256,7 +256,7 @@ List:
 
 ### SERVICES
 
-Can inject another serices.
+Can inject another services.
 
 HttpService - provides many scenarios with requests:
 
