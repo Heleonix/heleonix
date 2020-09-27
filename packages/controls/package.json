@@ -1,11 +1,11 @@
 {
     "name": "@heleonix/controls",
     "version": "1.0.0",
-    "main": "dist/index.cjs.js",
-    "module": "dist/index.esm.js",
-    "browser": "dist/index.umd.js",
-    "unpkg": "dist/index.umd.js",
-    "types": "dist/index.d.ts",
+    "main": "./dist/index.cjs.js",
+    "module": "./dist/index.esm.js",
+    "browser": "./dist/index.umd.js",
+    "unpkg": "./dist/index.umd.js",
+    "types": "./dist/index.d.ts",
     "description": "Set of controls for the Heleonix framework.",
     "author": "Heleonix - Hennadii Lutsyshyn",
     "license": "MIT",
@@ -22,6 +22,10 @@
         "access": "public"
     },
     "dependencies": {
-        "@babel/runtime-corejs3": "^7.10.5"
+        "@babel/runtime-corejs3": "^7.10.5",
+        "@heleonix/core": "*"
+    },
+    "peerDependencies": {
+        "@heleonix/core": "*"
     }
 }

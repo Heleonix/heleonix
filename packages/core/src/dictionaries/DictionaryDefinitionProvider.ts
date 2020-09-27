@@ -1,5 +1,5 @@
 import { Symbols } from "../Symbols";
-import { IDictionaryDefinition } from "../../types/IDictionaryDefinition";
+import { IDictionaryDefinition } from "./IDictionaryDefinition";
 import { DefinitionGettingError } from "../errors/DefinitionGettingError";
 import { Component } from "../Component";
 

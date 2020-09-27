@@ -18,26 +18,30 @@ function assertRuleIsProvided(componentName: string | symbol, rule: Rule | undef
 }
 
 function assertInjectionIsAllowed(componentName: string | symbol, hostInstance: Injectable, rule: Rule) {
-    if (!rule.allowedHosts.some((allwedHost) => hostInstance instanceof allwedHost)) {
+    if (!rule.allowedHosts.some((allowedHost) => hostInstance instanceof allowedHost)) {
         throw new InjectionNotAllowedError(componentName.toString(), hostInstance.constructor.name);
     }
 }
 
 export class DIContainer {
-    private readonly instances = new Map<string | symbol, Injectable>();
+    public readonly injector = new Injector(this);
 
-    private readonly injector = new Injector(this);
+    private readonly instances = new Map<string | symbol, Injectable>();
 
     private readonly components = new Map<string | symbol, typeof Injectable>();
 
-    public constructor(components: { [index: string]: typeof Injectable }, private readonly rules: Rule[]) {
+    private readonly rules: Rule[] = [];
+
+    public init(components: { [index: string]: typeof Injectable }, rules: Rule[]): void {
         for (const key in components) {
             this.components.set(key, components[key]);
         }
-    }
 
-    public init(root: Injectable): void {
-        root[Symbols.DIContainer] = this;
+        for (const key of Object.getOwnPropertySymbols(components)) {
+            this.components.set(key, components[(key as unknown) as string]);
+        }
+
+        rules.forEach((r) => this.rules.push(r));
     }
 
     public inject<TInjectable extends Injectable>(
@@ -52,7 +56,9 @@ export class DIContainer {
 
         assertComponentIsProvided(componentName, component);
 
-        const rule = this.rules.find((rule) => component instanceof rule.component);
+        const rule = this.rules.find(
+            (rule) => component === rule.component || component.prototype instanceof rule.component,
+        );
 
         assertRuleIsProvided(componentName, rule);
 

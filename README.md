@@ -96,8 +96,9 @@ Compiled into:
 ```
 
 Have methods:
-- setup(definition), like controls
-- getValue(key, args)
+
+-   setup(definition), like controls
+-   getValue(key, args)
 
 ### SETTINGS (MERGEABLE)
 
@@ -167,42 +168,34 @@ TBD
         from.items="@items"
         to.items=".selected"
         add.text="#Buttons.add | sex"
-        add.extraValue="1"
+        extraValue="1"
         remove.text="#Buttons.remove"
-        add.template="#Buttons.CustomAddButton"
-        to.ListItem.template="CustomListItem">
-        <template for="add">
+
+        add.clicked="behavior1"
+
+        add.template="#Buttons.CustomAddButton">
+        <Template for="add">
             <div>
-                <content />
+                <Content />
                 <!--Useful for wrapping only-->
             </div>
 
             <!--OR-->
 
-            <!--Fully custom template, but not workflow-->
-            <button name="btn"
-                value="=extraValue">
-                <!--Other data are automatically added-->
-                <Children />
-            </button>
-        </template>
+            <!--Fully custom template, including workflow-->
+            <div name="add" value="@extraValue">@text</div>
+        </Template>
     </FromToList>
-
-    <OnEvent name="SomeEvent">
-        <Set />
-        <Raise />
-        <Run></Run>
-    </OnEvent>
-    <OnEvent name="roleSelector.add.SomeEvent">
+    <Behavior name="behavior1">
         <Set target="@prop1"
-            value=".prop2" />
+             value=".state1" />
         <Raise event="SomeEvent"
-            prop1="@prop1"
-            prop2=".prop2" />
+               prop1="@prop1"
+               prop2=".state1" />
         <Run task="FetchSomething"
-            prop1="@prop1"
-            prop2=".prop2">
-            <OnSuccess>
+             prop1="@prop1"
+             prop2=".state1">
+             <OnSuccess>
                 <Set />
                 <Raise />
             </OnSuccess>
@@ -211,12 +204,12 @@ TBD
                 <Raise />
             </OnFail>
         </Run>
-    </OnEvent>
-    <OnChange target="roleSelector.add.text">
-        <Set />
-        <Raise />
-        <Run></Run>
-    </OnChange>
+        <OnChange target="roleSelector.add.text">
+            <Set />
+            <Raise />
+            <Run></Run>
+        </OnChange>
+    </Behavior>
 </Control>
 ```
 
@@ -249,38 +242,15 @@ When:
 TODO
 ```
 
-For:
+List:
 
 ```xml
 <div>
-	<Button value={1} text="Press me"/>
-	<Tabs name="users" prop1="{value1}" prop2={value2} prop3={value3}>
-		/*these templates implement at the end*/
-		<Header.template> <!--[name] for specific instance or View name for all instances-->
-			<div>
-				<Checkbox ... />
-			</div>
-		</Header.template>
-		<Header.Checkbox.template>
-			<div>---</div>
-			<Checkbox … />
-			<div>---</div>
-		</Header.Checkbox.template>
-		<Tab.template>
-			.......
-		</Tab.template>
-		<template>
-			<Header … />
-			<div>---------</div>
-			<children … />
-			<div>---------</div>
-		<template>
-		<For name="tabs">
-			<Tab>
-				<Button name="go"/>
-			</Tab>
-		</For-tabs>
-	</Tabs>
+	<List name="myUsers" for="@users" by="id" readonly=".readonly">
+        <Template for="Item"><!--Item is a required virtual non-existing control, so it must be provided as a template-->
+            <Button text="@name" value="@id" disabled="@readonly" />
+        </Template>
+	</List>
 </div>
 ```
 
@@ -290,7 +260,7 @@ Can inject another serices.
 
 HttpService - provides many scenarios with requests:
 
--   like sequential requests
+-   sequential requests
 -   parallel requests
 -   polling with intervals and specified number of retries
 -   optimistic updates with pending statuses

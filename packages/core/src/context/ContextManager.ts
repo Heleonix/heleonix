@@ -1,6 +1,6 @@
 import { Observable } from "../Observable";
-import { IContext } from "../../types/IContext";
-import { EventType } from "packages/core/types/EventType";
+import { IContext } from "./IContext";
+import { SystemEvent } from "packages/core/src/SystemEvent";
 import { Symbols } from "../Symbols";
 import { EventArgs } from "../EventArgs";
 
@@ -16,6 +16,6 @@ export class ContextManager extends Observable {
 
         this.context = { ...previousContext, ...diff };
 
-        this[Symbols.Observable_notify](EventType.ContextChanged, EventArgs.Empty);
+        this[Symbols.Observable_notify](SystemEvent.ContextChanged, EventArgs.Empty);
     }
 }

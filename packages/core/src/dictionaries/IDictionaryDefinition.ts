@@ -1,4 +1,4 @@
-import { IContext } from "./IContext";
+import { IContext } from "../context/IContext";
 import { IDictionaryItem } from "./IDictionaryItem";
 
 export interface IDictionaryDefinition {

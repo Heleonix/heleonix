@@ -1,7 +1,7 @@
 import { Component } from "./Component";
 import { Symbols } from "./Symbols";
-import { IObserver } from "./../types/IObserver";
-import { EventType } from "../types/EventType";
+import { IObserver } from "./IObserver";
+import { SystemEvent } from "./SystemEvent";
 import { EventArgs } from "./EventArgs";
 
 export class Observable extends Component {
@@ -21,7 +21,7 @@ export class Observable extends Component {
         }
     }
 
-    protected [Symbols.Observable_notify](event: EventType, args: EventArgs): void {
+    protected [Symbols.Observable_notify](event: SystemEvent, args: EventArgs): void {
         for (const observer of this[Symbols.Obserable_observers]) {
             try {
                 observer.observe(this, event, args);

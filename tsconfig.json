@@ -3,22 +3,15 @@
         "target": "ES5",
         "module": "ES2015",
         "lib": ["ES2020", "DOM"],
-
-        "outDir": "./dist",
-        "declarationDir": "./dist",
-
-        "baseUrl": ".",
-        "paths": {
-            "@heleonix/*": ["packages/*/src/index.ts"]
-        },
-
-        "declaration": true,
-        "declarationMap": true,
-        "sourceMap": true,
         "strict": true,
         "experimentalDecorators": true,
         "forceConsistentCasingInFileNames": true,
         "suppressImplicitAnyIndexErrors": true,
-        "allowSyntheticDefaultImports": true
+        "allowSyntheticDefaultImports": true,
+
+        "baseUrl": ".",
+        "paths": {
+            "@heleonix/*": ["packages/*/src/index.ts"]
+        }
     }
 }

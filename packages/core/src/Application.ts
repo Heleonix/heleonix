@@ -7,26 +7,35 @@ import { DIContainer } from "./injection/DIContainer";
 import { Rule } from "./injection/Rule";
 import { Component } from "./Component";
 import { ControlManager } from "./controls/ControlManager";
-import { CannotRunApplicationError } from "./errors/CannotRunApplicationError";
 import { ControlEngine } from "./controls/ControlEngine";
 import { Control } from "./controls/Control";
 import { ContextManager } from "./context/ContextManager";
 import { Injectable } from "./injection/Injectable";
 import { Symbols } from "./Symbols";
-import { HeleonixError } from "./errors/HeleonixError";
 import { NoRootElementError } from "./errors/NoRootElementError";
-import { DomElement } from "./controls/DomElement";
-import { UIControl } from "./controls/UIControl";
+import { DomControl } from "./controls/DomControl";
+import { DefinitiveControl } from "./controls/DefinitiveControl";
 import { Children } from "./controls/Children";
 import { SettingsDefinitionProvider } from "./settings/SettingsDefinitionProvider";
+import { inject } from "./injection/inject";
+import { ApplicationLifecycleError } from "./errors/ApplicationLifecycleError";
+import { ApplicationLifecycleStage } from "./errors/ApplicationLifecycleStage";
 
 export abstract class Application extends Injectable {
+    private readonly [Symbols.Application_DIContainer]: DIContainer;
+
+    private [Symbols.Application_rootControl]: Control | undefined;
+
     public constructor() {
-        super(null);
+        const diContainer = new DIContainer();
+
+        super(diContainer.injector);
+
+        this[Symbols.Application_DIContainer] = diContainer;
     }
 
-    public get root(): string {
-        return "html";
+    public get rootSelector(): string {
+        return "body";
     }
 
     public get errorHandler(): typeof ErrorHandler {
@@ -35,55 +44,55 @@ export abstract class Application extends Injectable {
 
     public abstract get controlDefinitionProvider(): typeof ControlDefinitionProvider;
 
-    public abstract get dictionaryDefinitionProvider(): typeof DictionaryDefinitionProvider;
+    //public abstract get dictionaryDefinitionProvider(): typeof DictionaryDefinitionProvider;
 
-    public abstract get styleDefinitionProvider(): typeof StyleDefinitionProvider;
+    //public abstract get styleDefinitionProvider(): typeof StyleDefinitionProvider;
 
-    public abstract get themeDefinitionProvider(): typeof ThemeDefinitionProvider;
+    //public abstract get themeDefinitionProvider(): typeof ThemeDefinitionProvider;
 
-    public abstract get settingsDefinitionProvider(): typeof SettingsDefinitionProvider;
+    //public abstract get settingsDefinitionProvider(): typeof SettingsDefinitionProvider;
 
-    public abstract get tasks(): { [index: string]: typeof Task };
+    //public abstract get tasks(): { [index: string]: typeof Task };
 
-    public abstract get converters(): { [index: string]: typeof Converter };
+    //public abstract get converters(): { [index: string]: typeof Converter };
 
-    public abstract get services(): { [index: string]: typeof Service };
+    //public abstract get services(): { [index: string]: typeof Service };
 
-    public run(): void {
+    public start(): void {
         try {
-            const rootElement = document.querySelector<HTMLElement>(this.root);
+            const rootElement = document.querySelector<HTMLElement>(this.rootSelector);
 
             if (!rootElement) {
-                throw new NoRootElementError();
+                throw new NoRootElementError(this.rootSelector);
             }
 
-            const diContainer = new DIContainer(
+            this[Symbols.Application_DIContainer].init(
                 {
-                    ...this.tasks,
-                    ...this.converters,
-                    ...this.services,
+                    //...this.tasks,
+                    //...this.converters,
+                    //...this.services,
                     [Symbols.ErrorHandler]: this.errorHandler,
                     [Symbols.ControlManager]: ControlManager,
-                    DomElement: DomElement,
-                    UIControl: UIControl,
-                    Children: Children,
-                    ContextManager: ContextManager,
-                    ControlEngine: ControlEngine,
-                    ControlDefinitionProvider: this.controlDefinitionProvider,
-                    DictionaryDefinitionProvider: this.dictionaryDefinitionProvider,
-                    StyleDefinitionProvider: this.styleDefinitionProvider,
-                    ThemeDefinitionProvider: this.themeDefinitionProvider,
-                    SettingsDefinitionProvider: this.settingsDefinitionProvider,
+                    [DomControl.name]: DomControl,
+                    [DefinitiveControl.name]: DefinitiveControl,
+                    [Children.name]: Children,
+                    [ContextManager.name]: ContextManager,
+                    [ControlEngine.name]: ControlEngine,
+                    [ControlDefinitionProvider.name]: this.controlDefinitionProvider,
+                    //[DictionaryDefinitionProvider.name]: this.dictionaryDefinitionProvider,
+                    //[StyleDefinitionProvider.name]: this.styleDefinitionProvider,
+                    //[ThemeDefinitionProvider.name]: this.themeDefinitionProvider,
+                    //[SettingsDefinitionProvider.name]: this.settingsDefinitionProvider,
                 },
                 [
                     new Rule(ErrorHandler, true, [Component]),
 
-                    new Rule(ContextManager, true, [DictionaryManager, StyleManager, ThemeManager]),
+                    //new Rule(ContextManager, true, [DictionaryManager, StyleManager, ThemeManager]),
 
                     new Rule(ControlDefinitionProvider, true, [ControlManager]),
-                    new Rule(DictionaryDefinitionProvider, true, [DictionaryManager]),
-                    new Rule(StyleDefinitionProvider, true, [StyleManager]),
-                    new Rule(ThemeDefinitionProvider, true, [ThemeManager]),
+                    //new Rule(DictionaryDefinitionProvider, true, [DictionaryManager]),
+                    //new Rule(StyleDefinitionProvider, true, [StyleManager]),
+                    //new Rule(ThemeDefinitionProvider, true, [ThemeManager]),
 
                     new Rule(ControlManager, true, [ControlEngine]),
 
@@ -93,17 +102,37 @@ export abstract class Application extends Injectable {
                 ],
             );
 
-            diContainer.init(this);
+            const controlEngine = this[Symbols.Application_DIContainer].inject<ControlEngine>(ControlEngine.name, this);
 
-            const controlEngine = diContainer.inject<ControlEngine>(ControlEngine.name, this);
-
-            controlEngine.buildItem(
-                { control: this.constructor.name, name: this.constructor.name, data: [], children: [] },
-                null,
+            this[Symbols.Application_rootControl] = controlEngine.buildItem(
+                { tag: this.constructor.name, name: this.constructor.name, properties: [], children: [] },
+                undefined,
                 rootElement,
             );
+
+            if (!this[Symbols.Application_rootControl]) {
+                throw
+            }
         } catch (e) {
-            throw new CannotRunApplicationError(e);
+            throw new ApplicationLifecycleError(ApplicationLifecycleStage.Start, e);
+        }
+    }
+
+    public stop(): void {
+        try {
+            const rootControl = this[Symbols.Application_rootControl];
+
+            if (!rootControl) {
+                return;
+            }
+
+            const controlEngine = this[Symbols.Application_DIContainer].inject<ControlEngine>(ControlEngine.name, this);
+
+            controlEngine.destroy(rootControl);
+
+            this[Symbols.Application_rootControl] = undefined;
+        } catch (e) {
+            throw new ApplicationLifecycleError(ApplicationLifecycleStage.Stop, e);
         }
     }
 }

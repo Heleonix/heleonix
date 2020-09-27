@@ -1,8 +1,8 @@
 import { DefinitionGettingError } from "../errors/DefinitionGettingError";
 import { Symbols } from "../Symbols";
 import { Component } from "../Component";
-import { IControlDefinition } from "../../types/IControlDefinition";
-import { DomElement } from "./DomElement";
+import { IControlDefinition } from "./IControlDefinition";
+import { DomControl } from "./DomControl";
 import { Children } from "./Children";
 
 function isDomElementName(name: string): boolean {
@@ -12,32 +12,32 @@ function isDomElementName(name: string): boolean {
 }
 
 export abstract class ControlDefinitionProvider extends Component {
-    public [Symbols.Provider_getDefinition](controlName: string): IControlDefinition {
+    public [Symbols.Provider_getDefinition](tag: string): IControlDefinition {
         try {
-            if (isDomElementName(controlName)) {
-                return { control: DomElement.name, items: [] };
+            if (isDomElementName(tag)) {
+                return { tag: tag, type: DomControl.name };
             }
 
             if (
-                controlName === Children.name
-                // || controlName === OnEvent.name
-                // || controlName === OnChange.name
-                // || controlName === Set.name
-                // || controlName === Raise.name
-                // || controlName === Run.name
-                // || controlName === OnSuccess.name
-                // || controlName === OnFail.name
+                tag === Children.name
+                // || tag === OnEvent.name
+                // || tag === OnChange.name
+                // || tag === Set.name
+                // || tag === Raise.name
+                // || tag === Run.name
+                // || tag === OnSuccess.name
+                // || tag === OnFail.name
             ) {
-                return { control: controlName, items: [] };
+                return { tag: tag, type: tag };
             }
 
-            return this.getDefinition(controlName);
+            return this.getDefinition(tag);
         } catch (e) {
             this[Symbols.ErrorHandler][Symbols.ErrorHandler_handle](e);
 
-            throw new DefinitionGettingError(controlName);
+            throw new DefinitionGettingError(tag);
         }
     }
 
-    abstract getDefinition(controlName: string): IControlDefinition;
+    public abstract getDefinition(tag: string): IControlDefinition;
 }

@@ -5,23 +5,35 @@ import { Symbols } from "../Symbols";
 import { ControlCreationError } from "../errors/ControlCreationError";
 import { automatic } from "../injection/automatic";
 import { Control } from "./Control";
-import { IControlUsage } from "../../types/IControlUsage";
+import { IControlUsage } from "./IControlUsage";
+import { DefinitiveControl } from "./DefinitiveControl";
+import { UsageType } from "./UsageType";
 
 export class ControlManager extends Component {
     @inject private readonly ControlDefinitionProvider = automatic<ControlDefinitionProvider>();
 
-    public createControl(usage: IControlUsage): Control {
+    public createControl(
+        fullName: string,
+        usage: IControlUsage,
+        usageType: UsageType,
+        scopedParent?: Control,
+    ): Control {
         try {
-            const definition = this.ControlDefinitionProvider[Symbols.Provider_getDefinition](usage.control);
-            const control = this[Symbols.DIContainer].inject<Control>(definition.control, this);
+            const definition = this.ControlDefinitionProvider[Symbols.Provider_getDefinition](usage.tag);
 
-            control[Symbols.Control_setup](definition, usage);
+            if (!definition.type) {
+                definition.type = DefinitiveControl.name;
+            }
 
-            return control;
+            const instance = this[Symbols.DIContainer].inject<Control>(definition.type, this);
+
+            instance[Symbols.Control_setup](fullName, definition, usage, usageType, scopedParent);
+
+            return instance;
         } catch (e) {
             this[Symbols.ErrorHandler][Symbols.ErrorHandler_handle](e);
 
-            throw new ControlCreationError(usage.control);
+            throw new ControlCreationError(usage.tag);
         }
     }
 }

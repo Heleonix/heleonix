@@ -1,0 +1,12 @@
+{
+    "extends": "./tsconfig",
+    "compilerOptions": {
+        "baseUrl": "",
+        "paths": {},
+        "outDir": "./dist",
+        "sourceMap": true,
+        "declaration": true,
+        "declarationMap": true,
+        "declarationDir": "./dist"
+    }
+}

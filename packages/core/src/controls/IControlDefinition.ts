@@ -1,7 +1,9 @@
 import { IControlUsage } from "./IControlUsage";
 
 export interface IControlDefinition {
-    control: string;
+    tag: string;
 
-    items: IControlUsage[];
+    type?: string;
+
+    items?: IControlUsage[];
 }

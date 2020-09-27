@@ -1,24 +1,43 @@
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+var HtmlWebpackPlugin = require("html-webpack-plugin");
+
+var path = require("path");
 
 module.exports = {
-  mode: 'development',
-  entry: './index.js',
-  output: {
-    path: path.resolve(__dirname, './dist'),
-    filename: 'index_bundle.js'
-  },
-  plugins: [new HtmlWebpackPlugin()],
-  module: {
-    rules: [
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          options: { rootMode: 'upward' }
-        }
-      }
-    ]
-  }
+    entry: "./src/index.ts",
+    output: {
+        path: path.resolve("./dist"),
+        filename: "index.js",
+    },
+    resolve: {
+        extensions: [".ts", ".js"],
+    },
+    plugins: [new HtmlWebpackPlugin()],
+    module: {
+        rules: [
+            {
+                test: /\.js$/,
+                enforce: "pre",
+                use: ["source-map-loader"],
+            },
+            {
+                test: /\.ts?$/,
+                use: [
+                    {
+                        loader: "babel-loader",
+                        options: {
+                            rootMode: "upward",
+                        },
+                    },
+                    {
+                        loader: "ts-loader",
+                        options: {
+                            configFile: "tsconfig.app.json",
+                        },
+                    },
+                ],
+                exclude: /node_modules/,
+            },
+        ],
+    },
+    devtool: "source-map",
 };
