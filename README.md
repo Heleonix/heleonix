@@ -22,7 +22,7 @@ Context is an object with string values, which splits resources of applications:
 ```json
 {
     "env": "dev",
-    "brand": "brand1",
+    "customer": "customer1",
     "culture": "uk-UK"
 }
 ```
@@ -37,8 +37,8 @@ In webpack plugins context is specified as below:
         "values": ["dev", "test", "prod"],
     },
     {
-        "name": "brand",
-        "values": ["brand1", "brand2", "brand3"],
+        "name": "customer",
+        "values": ["customer1", "customer2", "customer3"],
     },
     {
         "name": "culture",
@@ -51,18 +51,18 @@ In webpack plugins context is specified as below:
 Context-specific files are named in format:
 
 MyFile.ext
-MyFile.uk-UK.brand1.dev.ext
+MyFile.uk-UK.customer1.dev.ext
 MyFile.uk-UK.ext
 MyFile.dev.ext
-MyFile.brand1.ext
+MyFile.customer1.ext
 
 ### DICTIONARIES (MERGEABLE)
 
 Buttons.en-US.dic
-Buttons.en-US.brand1.dic
-Buttons.es-ES.brand1.dic
+Buttons.en-US.customer1.dic
+Buttons.es-ES.customer1.dic
 
-Buttons.test.brand2.en-US.dic:
+Buttons.test.customer2.en-US.dic:
 
 ```xml
 <Dictionary>
@@ -83,7 +83,7 @@ Compiled into:
     "name": "Buttons",
     "context": {
         "env": "test",
-        "brand": "brand2",
+        "customer": "customer1",
         "culture": "en-US"
     },
     "items": {
@@ -125,8 +125,8 @@ OR
 ```
 
 MyView.style
-MyView.brand1.style
-MyView.en-US.brand1.style
+MyView.customer1.style
+MyView.en-US.customer1.style
 
 MyView.style:
 
@@ -217,11 +217,6 @@ TBD
         </Run>
     </Activity>
 </Control>
-```
-
-FromToList.view
-FromToList.brand1.view
-FromToList.brand1.en.view
 
 FromToList.view:
 
