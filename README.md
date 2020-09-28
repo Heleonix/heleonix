@@ -168,7 +168,7 @@ TBD
         from.items="@items"
         to.items=".selected"
         add.text="#Buttons.add | sex"
-        remove.text="#Buttons.remove"
+        add.text:onChanged="activity1"
         add.onClicked="activity1"
 
         extraValue="1"
