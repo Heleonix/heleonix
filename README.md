@@ -160,7 +160,7 @@ TBD
 
 ### CONTROLS
 
-```xml
+````xml
 <Control as="FromToList">
     <FromToList name="roleSelector"
         isDisplayed=".state1"
@@ -169,16 +169,12 @@ TBD
         to.items=".selected"
         add.text="#Buttons.add | sex"
         remove.text="#Buttons.remove"
-        remove.text.onChanging="activity2"
-        remove.text.onChanged="activity3"
         add.onClicked="activity1"
 
         extraValue="1"
 
         onAdded="activity3"
-        onRemoved="activity4"
-
-        add.template="#Buttons.CustomAddButton">
+        onRemoved="activity4">
         <Template for="add">
             <div>
                 <Content />
@@ -189,24 +185,27 @@ TBD
 
             <!--Fully custom template, including workflow-->
             <div name="add" value="@extraValue">@text</div>
+            <OnChange target="control's items" activity="existingActivity OR newActivity" />
+            <Activity name="existingActivity OR newActivity">
+                <!--Some logic here-->
+            </Activity>
         </Template>
     </FromToList>
-
+    <!--Only for state, properties and events of this control. All are defined at the top level-->
     <OnChange target="@prop1" activity="activity31" />
     <OnChange target=".state1" activity="activity32" />
     <OnEvent name="onSomeEvent" activity="activity33" />
-
+    <!--Can operate on this control, items and children. All are defined at the top level-->
     <Activity name="activity1">
         <Set target="add.text" value="remove.text" />
         <Set target="@prop1" value=".state1" />
         <Raise event="onSomeEvent"
-               prop1="@prop1"
-               prop2=".state1" />
+            prop1="@prop1"
+            prop2=".state1" />
         <Run task="FetchSomething"
-             prop1="@prop1"
-             prop2=".state1"
-             prop3="add.text" />
-        </Run>
+            prop1="@prop1"
+            prop2=".state1"
+            prop3="add.text" />
     </Activity>
 </Control>
 
@@ -221,7 +220,7 @@ FromToList.view:
 		<List name="to" />
 	</div>
 </Control>
-```
+````
 
 Switch:
 
