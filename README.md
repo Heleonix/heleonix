@@ -163,18 +163,17 @@ TBD
 ````xml
 <Control as="FromToList">
     <FromToList name="roleSelector"
-        isDisplayed=".state1"
+        isDisplayed="@isDisplayed"
         isVisible="@shouldDisplay"
         from.items="@items"
-        to.items=".selected"
+        to.items="@selectedItems"
         add.text="#Buttons.add | sex"
-        add.text:onChanged="activity1"
         add.onClicked="activity1"
 
         extraValue="1"
 
-        onAdded="activity3"
-        onRemoved="activity4">
+        onAdded="activity2"
+        onRemoved="activity3">
         <Template for="add">
             <div>
                 <Content />
@@ -183,29 +182,22 @@ TBD
 
             <!--OR-->
 
-            <!--Fully custom template, including workflow-->
+            <!--Fully custom template, including activities-->
             <div name="add" value="@extraValue">@text</div>
-            <OnChange target="control's items" activity="existingActivity OR newActivity" />
+            <OnChange target="'add' control properties" activity="'add' control existingActivity OR newActivity" />
             <Activity name="existingActivity OR newActivity">
                 <!--Some logic here-->
             </Activity>
         </Template>
     </FromToList>
-    <!--Only for state, properties and events of this control. All are defined at the top level-->
+    <!--Only for properties and events of this control-->
     <OnChange target="@prop1" activity="activity31" />
-    <OnChange target=".state1" activity="activity32" />
     <OnEvent name="onSomeEvent" activity="activity33" />
-    <!--Can operate on this control, items and children. All are defined at the top level-->
+    <!--Can operate on this control-->
     <Activity name="activity1">
-        <Set target="add.text" value="remove.text" />
-        <Set target="@prop1" value=".state1" />
-        <Raise event="onSomeEvent"
-            prop1="@prop1"
-            prop2=".state1" />
-        <Run task="FetchSomething"
-            prop1="@prop1"
-            prop2=".state1"
-            prop3="add.text" />
+        <Set target="@prop1" value="@prop2" />
+        <Raise event="onSomeEvent" prop1="@prop1" prop2="@prop2" />
+        <Run task="FetchSomething" prop1="@prop1" prop2="@prop2" prop3="@prop3" />
     </Activity>
 </Control>
 
