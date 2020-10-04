@@ -161,38 +161,32 @@ TBD
 ### CONTROLS
 
 ````xml
-<Control as="FromToList">
+Re<!--CustomAddButton-->
+<Control>
+    <div>
+        <button />
+    </div>
+    <!--All the properties and activities are used as in a regular control-->
+     <Activity name="activity1">
+        <!-- ... -->
+     </Activity>
+</Control>
+
+<!--CustomFromToList-->
+<Control replace="FromToList"><!--Use this control wherever the <FromToList /> is used-->
+    <!--Use the original FromToList-->
     <FromToList name="roleSelector"
-        isDisplayed="@isDisplayed"
-        isVisible="@shouldDisplay"
-        from.items="@items"
-        to.items="@selectedItems"
+        from.items="items"
+        to.items="selectedItems"
+        add.template="CustomAddButton"
         add.text="#Buttons.add | sex"
         add.onClicked="activity1"
-
-        extraValue="1"
-
-        onAdded="activity2"
-        onRemoved="activity3">
-        <Template for="add">
-            <div>
-                <Content />
-                <!--Useful for wrapping only-->
-            </div>
-
-            <!--OR-->
-
-            <!--Fully custom template, including activities-->
-            <div name="add" value="@extraValue">@text</div>
-            <OnChange target="'add' control properties" activity="'add' control existingActivity OR newActivity" />
-            <Activity name="existingActivity OR newActivity">
-                <!--Some logic here-->
-            </Activity>
-        </Template>
-    </FromToList>
+        onAdded
+        onRemoved
+        extraValue="1" />
     <!--Only for properties and events of this control-->
-    <OnChange target="@prop1" activity="activity31" />
-    <OnEvent name="onSomeEvent" activity="activity33" />
+    <OnUpdating property="roleSelector.to.items" activity="activity31" />
+    <OnRaise event="onSomeEvent" activity="activity33" />
     <!--Can operate on this control-->
     <Activity name="activity1">
         <Set target="@prop1" value="@prop2" />
