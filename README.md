@@ -161,34 +161,34 @@ TBD
 ### CONTROLS
 
 ````xml
-Re<!--CustomAddButton-->
+<!--CustomAddButton-->
 <Control>
     <div>
         <button />
     </div>
-    <!--All the properties and activities are used as in a regular control-->
+    <!--All the triggers and activities are used as in a regular control-->
      <Activity name="activity1">
         <!-- ... -->
      </Activity>
 </Control>
 
 <!--CustomFromToList-->
-<Control replace="FromToList"><!--Use this control wherever the <FromToList /> is used-->
+<Control replace="FromToList"><!--Use this control for all the application whereever the <FromToList /> is used-->
     <!--Use the original FromToList-->
     <FromToList name="roleSelector"
         from.items="items"
         to.items="selectedItems"
-        add.template="CustomAddButton"
-        add.text="#Buttons.add | sex"
+        add.template="CustomAddButton -  for exactly the button with the 'add' name"
+        Button.template="CustomAddButton - for all buttons in this control and it's descendants"
+        subControlName.Button.template="CustomAddButton - for all buttons in the 'subControl' control and it's descendants"
+        add.text="@Buttons.add | sex"
         add.onClicked="activity1"
-        onAdded
-        onRemoved
-        extraValue="1" />
-    <!--Only for properties and events of this control-->
-    <OnUpdating property="roleSelector.to.items" activity="activity31" />
-    <OnRaise event="onSomeEvent" activity="activity33" />
-    <!--Can operate on this control-->
-    <Activity name="activity1">
+        onAdded="actiity1"
+        onRemoved="activity2"
+        extraValue="extraProp" />
+    <OnUpdating of="roleSelector.to.items" activity="activity31" />
+    <OnRaise of="onSomeEvent" activity="activity33" />
+    <Activity name="roleSelector.add.activity1">
         <Set target="@prop1" value="@prop2" />
         <Raise event="onSomeEvent" prop1="@prop1" prop2="@prop2" />
         <Run task="FetchSomething" prop1="@prop1" prop2="@prop2" prop3="@prop3" />
