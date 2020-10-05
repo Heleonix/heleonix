@@ -176,23 +176,23 @@ TBD
     <FromToList name="roleSelector"
         from.items="items"
         to.items="selectedItems"
-        add.template="CustomAddButton -  for exactly the button with the 'add' name"
+        add.template="CustomAddButton - for exactly the button with the 'add' name"
         Button.template="CustomAddButton - for all buttons in this control and it's descendants"
         subControlName.Button.template="CustomAddButton - for all buttons in the 'subControlName' control and it's descendants"
-        add.text="@Buttons.add | sex"
+        add.text="@Buttons.add | converter1"
         add.clicked="activity1"
         added="activity1"
         removed="activity1"
         extraValueForCustomControls="extraValue" />
-    <OnUpdating of="items" run="activity1" />
-    <OnUpdated of="extraValue" run="activity1" />
-    <OnAdding of="items" run="activity1" />
-    <OnAdded of="items" run="activity1" />
-    <OnRemoving of="items" run="activity1" />
-    <OnRemoved of="items" run="activity1" />
-    <OnMoving of="items" run="activity1" />
-    <OnMoved of="items" run="activity1" />
-    <OnRaise of="someEvent" run="activity1" />
+    <OnUpdating target="items" activity="activity1" />
+    <OnUpdated target="extraValue" activity="activity1" />
+    <OnAdding target="items" activity="activity1" />
+    <OnAdded target="items" activity="activity1" />
+    <OnRemoving target="items" activity="activity1" />
+    <OnRemoved target="items" activity="activity1" />
+    <OnMoving target="items" activity="activity1" />
+    <OnMoved target="items" activity="activity1" />
+    <OnRaise target="someEvent" activity="activity1" />
     <Activity name="activity1">
         <Update target="prop1" value="prop2" />
         <Add />
