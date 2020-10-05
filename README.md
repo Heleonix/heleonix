@@ -184,17 +184,17 @@ TBD
         added="activity1"
         removed="activity1"
         extraValueForCustomControls="extraValue" />
-    <OnUpdating target="items" activity="activity1" />
-    <OnUpdated target="extraValue" activity="activity1" />
-    <OnAdding target="items" activity="activity1" />
-    <OnAdded target="items" activity="activity1" />
-    <OnRemoving target="items" activity="activity1" />
-    <OnRemoved target="items" activity="activity1" />
-    <OnMoving target="items" activity="activity1" />
-    <OnMoved target="items" activity="activity1" />
-    <OnRaise target="someEvent" activity="activity1" />
+    <OnUpdating property="items" run="activity1" />
+    <OnUpdated property="extraValue" run="activity1" />
+    <OnAdding property="items" run="activity1" />
+    <OnAdded property="items" run="activity1" />
+    <OnRemoving property="items" run="activity1" />
+    <OnRemoved property="items" run="activity1" />
+    <OnMoving property="items" run="activity1" />
+    <OnMoved property="items" run="activity1" />
+    <OnRaise property="someEvent" run="activity1" />
     <Activity name="activity1">
-        <Update target="prop1" value="prop2" />
+        <Update property="prop1" value="prop2" />
         <Add />
         <Remove />
         <Move />
