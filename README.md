@@ -166,7 +166,6 @@ TBD
     <div>
         <button />
     </div>
-    <!--All the triggers and activities are used as in a regular control-->
      <Activity name="activity1">
         <!-- ... -->
      </Activity>
@@ -177,20 +176,30 @@ TBD
     <FromToList name="roleSelector"
         from.items="items"
         to.items="selectedItems"
-        add.control="CustomAddButton -  for exactly the button with the 'add' name"
-        Button.control="CustomAddButton - for all buttons in this control and it's descendants"
-        subControlName.Button.control="CustomAddButton - for all buttons in the 'subControl' control and it's descendants"
+        add.template="CustomAddButton -  for exactly the button with the 'add' name"
+        Button.template="CustomAddButton - for all buttons in this control and it's descendants"
+        subControlName.Button.template="CustomAddButton - for all buttons in the 'subControlName' control and it's descendants"
         add.text="@Buttons.add | sex"
-        add.onClicked="activity1"
+        add.clicked="activity1"
         added="activity1"
-        removed="activity2"
-        extraValue="extraProp" />
-    <OnUpdating of="items" activity="activity31" />
-    <OnRaise of="onSomeEvent" activity="activity33" />
+        removed="activity1"
+        extraValueForCustomControls="extraValue" />
+    <OnUpdating of="items" run="activity1" />
+    <OnUpdated of="extraValue" run="activity1" />
+    <OnAdding of="items" run="activity1" />
+    <OnAdded of="items" run="activity1" />
+    <OnRemoving of="items" run="activity1" />
+    <OnRemoved of="items" run="activity1" />
+    <OnMoving of="items" run="activity1" />
+    <OnMoved of="items" run="activity1" />
+    <OnRaise of="someEvent" run="activity1" />
     <Activity name="activity1">
-        <Set target="prop1" value="prop2" />
-        <Raise event="onSomeEvent" prop1="prop1" prop2="prop2" />
-        <Run task="FetchSomething" prop1="prop1" prop2="prop2" prop3="prop3" />
+        <Update target="prop1" value="prop2" />
+        <Add />
+        <Remove />
+        <Move />
+        <Raise event="someEvent" prop1="prop1" prop2="prop2" />
+        <Call task="FetchSomething" prop1="prop1" prop2="prop2" prop3="prop3" />
     </Activity>
 </Control>
 
