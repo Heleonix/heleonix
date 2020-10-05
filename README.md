@@ -178,20 +178,20 @@ TBD
     <FromToList name="roleSelector"
         from.items="items"
         to.items="selectedItems"
-        add.template="CustomAddButton -  for exactly the button with the 'add' name"
-        Button.template="CustomAddButton - for all buttons in this control and it's descendants"
-        subControlName.Button.template="CustomAddButton - for all buttons in the 'subControl' control and it's descendants"
+        add.control="CustomAddButton -  for exactly the button with the 'add' name"
+        Button.control="CustomAddButton - for all buttons in this control and it's descendants"
+        subControlName.Button.control="CustomAddButton - for all buttons in the 'subControl' control and it's descendants"
         add.text="@Buttons.add | sex"
         add.onClicked="activity1"
-        onAdded="actiity1"
+        onAdded="activity1"
         onRemoved="activity2"
         extraValue="extraProp" />
-    <OnUpdating of="roleSelector.to.items" activity="activity31" />
+    <OnUpdating of="items" activity="activity31" />
     <OnRaise of="onSomeEvent" activity="activity33" />
-    <Activity name="roleSelector.add.activity1">
-        <Set target="@prop1" value="@prop2" />
-        <Raise event="onSomeEvent" prop1="@prop1" prop2="@prop2" />
-        <Run task="FetchSomething" prop1="@prop1" prop2="@prop2" prop3="@prop3" />
+    <Activity name="activity1">
+        <Set target="prop1" value="prop2" />
+        <Raise event="onSomeEvent" prop1="prop1" prop2="prop2" />
+        <Run task="FetchSomething" prop1="prop1" prop2="prop2" prop3="prop3" />
     </Activity>
 </Control>
 
