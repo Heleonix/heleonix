@@ -173,7 +173,7 @@ TBD
 </Control>
 
 <!--CustomFromToList-->
-<Control replace="FromToList"><!--Use this control for all the application whereever the <FromToList /> is used-->
+<Control extends="FromToList"><!--Use this control for all the application whereever the <FromToList /> is used-->
     <!--Use the original FromToList-->
     <FromToList name="roleSelector"
         from.items="items"
