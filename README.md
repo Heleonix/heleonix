@@ -232,10 +232,9 @@ List:
 
 ```xml
 <div>
-	<List name="myUsers" for="@users" by="id" readonly=".readonly">
-        <Template for="Item"><!--Item is a required virtual non-existing control, so it must be provided as a template-->
-            <Button text="@name" value="@id" disabled="@readonly" />
-        </Template>
+	<List name="myUsers" for="users" by="id" extraProperty="extraValue">
+            <!--Item is a required virtual non-existing control, so it must be provided as a template-->
+            <Button text="name" value="id" extraProp="extraProperty" />
 	</List>
 </div>
 ```
