@@ -173,8 +173,7 @@ TBD
 </Control>
 
 <!--CustomFromToList-->
-<Control extends="FromToList"><!--Use this control for all the application whereever the <FromToList /> is used-->
-    <!--Use the original FromToList-->
+<Control>
     <FromToList name="roleSelector"
         from.items="items"
         to.items="selectedItems"
@@ -183,8 +182,8 @@ TBD
         subControlName.Button.control="CustomAddButton - for all buttons in the 'subControl' control and it's descendants"
         add.text="@Buttons.add | sex"
         add.onClicked="activity1"
-        onAdded="activity1"
-        onRemoved="activity2"
+        added="activity1"
+        removed="activity2"
         extraValue="extraProp" />
     <OnUpdating of="items" activity="activity31" />
     <OnRaise of="onSomeEvent" activity="activity33" />
