@@ -176,14 +176,16 @@ TBD
     <FromToList name="roleSelector"
         from.items="items"
         to.items="selectedItems"
-        add.template="CustomAddButton - for exactly the button with the 'add' name"
-        Button.template="CustomAddButton - for all buttons in this control and it's descendants"
-        subControlName.Button.template="CustomAddButton - for all buttons in the 'subControlName' control and it's descendants"
+        add.template="CustomAddButton - for exactly the control with the 'add' name"
+        Button.template="CustomAddButton - for all buttons in this control"
+        subControlName.Button.template="CustomAddButton - for all buttons in the 'subControlName' control"
         add.text="@Buttons.add | converter1"
         add.clicked="activity1"
         added="activity1"
         removed="activity1"
-        extraValueForCustomControls="extraValue" />
+        add.extraValueForCustomControls="extraValue">
+        <Template target="from.add" value="CustomAddButton" />
+    </FromToList>
     <OnUpdating property="items" run="activity1" />
     <OnUpdated property="extraValue" run="activity1" />
     <OnAdding property="items" run="activity1" />
@@ -232,11 +234,13 @@ List:
 
 ```xml
 <div>
-	<List name="myUsers" for="users" by="id" extraProperty="extraValue">
-            <!--Item is a required virtual non-existing control, so it must be provided as a template-->
-            <Button text="name" value="id" extraProp="extraProperty" />
-	</List>
+	<List name="myUsers" for="users" by="id" extraProperty="extraValue" Item.template="CustomListItem" />
 </div>
+
+<!--CustomListItem: What dynamic name would it have? [0], [1], [2] etc for getting/setting properties via users.[0].id-->
+<Control>
+    <button name="how to set dynamic name to access HTML elements in DOM?" value="extraProperty">item.id</button>
+</Control>
 ```
 
 ### SERVICES
