@@ -177,7 +177,7 @@ TBD
         from.items="items"
         to.items="selectedItems"
         add.template="CustomAddButton - for exactly the control with the 'add' name"
-        Button.template="CustomAddButton - for all buttons in this control"
+        Button.template="CustomAddButton - for all buttons in this control. What if some control has name 'Button'?"
         subControlName.Button.template="CustomAddButton - for all buttons in the 'subControlName' control"
         add.text="@Buttons.add | converter1"
         add.clicked="activity1"
