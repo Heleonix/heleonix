@@ -184,7 +184,6 @@ TBD
         added="activity1"
         removed="activity1"
         add.extraValueForCustomControls="extraValue">
-        <Template target="from.add" value="CustomAddButton" />
     </FromToList>
     <OnUpdating property="items" run="activity1" />
     <OnUpdated property="extraValue" run="activity1" />
