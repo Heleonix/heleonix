@@ -177,7 +177,7 @@ TBD
         from.items="items"
         to.items="selectedItems"
         add.template="CustomAddButton - for exactly the control with the 'add' name"
-        Button.template="CustomAddButton - for all buttons in this control. What if some control has name 'Button'?"
+        Button.template="CustomAddButton - for all buttons in this control. If there is a control with name 'Button' and Button control, handle it as an error"
         subControlName.Button.template="CustomAddButton - for all buttons in the 'subControlName' control"
         add.text="@Buttons.add | converter1"
         add.clicked="activity1"
@@ -193,7 +193,7 @@ TBD
     <OnRemoved property="items" run="activity1" />
     <OnMoving property="items" run="activity1" />
     <OnMoved property="items" run="activity1" />
-    <OnRaise property="someEvent" run="activity1" />
+    <OnRaise event="someEvent" run="activity1" />
     <Activity name="activity1">
         <Update property="prop1" value="prop2" />
         <Add />
