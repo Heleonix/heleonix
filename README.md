@@ -236,9 +236,9 @@ List:
 	<List name="myUsers" for="users" by="id" extraProperty="extraValue" Item.template="CustomListItem" />
 </div>
 
-<!--CustomListItem: What dynamic name would it have? [0], [1], [2] etc for getting/setting properties via users.[0].id-->
+<!--CustomListItem: Dynamic name is [0], [1], [2] etc for getting/setting properties via users.[0].id-->
 <Control>
-    <button name="how to set dynamic name to access HTML elements in DOM?" value="extraProperty">item.id</button>
+    <button name="id" value="extraProperty">item.id</button>
 </Control>
 ```
 
