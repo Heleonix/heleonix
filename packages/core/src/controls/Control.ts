@@ -10,8 +10,8 @@ import { ControlCollection } from "./ControlCollection";
 import { UsageType } from "./UsageType";
 import { ControlEvent } from "./UpdateType";
 
-const handleState = Symbol("handleState");
-const state = Symbol("state");
+const handleStore = Symbol("handleStore");
+const store = Symbol("store");
 const fullNameKey = Symbol("fullName");
 const scopedParentKey = Symbol("scopedParent");
 const itemsKey = Symbol("itemsKey");
@@ -55,7 +55,7 @@ export abstract class Control extends Component {
 
     private readonly [childrenKey]: ControlCollection = new ControlCollection();
 
-    private readonly [state]: unknown;
+    private readonly [store]: unknown;
 
     public [Symbols.Control_setState](path: string, value: unknown): void {
         // set state value by path
@@ -80,13 +80,13 @@ export abstract class Control extends Component {
     }
 
     // callback from state
-    private [handleState](path: string, value: unknown): void {
+    private [handleStore](path: string, value: unknown): void {
         this.ControlEngine[Symbols.ControlEngine_propagateState](this, path, value);
     }
 
     public abstract [Symbols.Control_build](element: HTMLElement): void;
 
-    public abstract [Symbols.Control_handleUpdate](binding: string, value: unknown): void;
+    public abstract [Symbols.Control_handleChange](path: string, value: unknown): void;
 
     // public abstract [Symbols.Control_handleEvent](event): void;
 

@@ -16,7 +16,7 @@ export abstract class CustomControl extends Control {
         }
     }
 
-    public [Symbols.Control_handleUpdate](binding: string, value: unknown): void {
+    public [Symbols.Control_handleChange](binding: string, value: unknown): void {
         try {
             this.handleUpdate(binding, value);
         } catch (e) {

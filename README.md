@@ -173,6 +173,8 @@ TBD
 
 <Control>
     <FromToList name="roleSelector"
+        isReadonly="*SomeSettings.isReadonly"
+        isReadonly:updating="activity1"
         from.items="items"
         from.items:adding="activity1"
         to.items="selectedItems"

@@ -26,7 +26,7 @@ export class Children extends Control {
 
     public [Symbols.Control_destroy](): void {}
 
-    public [Symbols.Control_handleUpdate](source: string, value: unknown): void {}
+    public [Symbols.Control_handleChange](source: string, value: unknown): void {}
 
     //public [Symbols.Control_handleEvent](event: string, args: EventArgs): void {}
 }

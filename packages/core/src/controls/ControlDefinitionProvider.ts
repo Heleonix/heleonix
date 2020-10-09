@@ -20,13 +20,9 @@ export abstract class ControlDefinitionProvider extends Component {
 
             if (
                 tag === Children.name
-                // || tag === OnEvent.name
-                // || tag === OnChange.name
-                // || tag === Set.name
+                // || tag === Update.name
                 // || tag === Raise.name
-                // || tag === Run.name
-                // || tag === OnSuccess.name
-                // || tag === OnFail.name
+                // || tag === Call.name
             ) {
                 return { tag: tag, type: tag };
             }

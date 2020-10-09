@@ -21,7 +21,7 @@ export class Symbols {
 
     public static readonly Provider_getDefinition = Symbol("Provider_getDefinition");
 
-    public static readonly Control_handleUpdate = Symbol("Control_update");
+    public static readonly Control_handleChange = Symbol("Control_handleChange");
 
     public static readonly Control_setState = Symbol("Control_setState");
 

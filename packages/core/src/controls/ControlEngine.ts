@@ -125,14 +125,6 @@ export class ControlEngine extends Component {
         }
     }
 
-    public isPropertyBinding(binding?: string): boolean {
-        return binding?.[0] === "@";
-    }
-
-    public isStateBinding(binding?: string): boolean {
-        return binding?.[0] === ".";
-    }
-
     public getValue(control: Control, property: string): unknown {
         try {
             const properties = control[Symbols.Control_usage].properties;
@@ -206,13 +198,13 @@ export class ControlEngine extends Component {
             for (const property of target[Symbols.Control_usage].properties || []) {
                 if (property.binding.startsWith(binding) || binding.startsWith(property.binding)) {
                     for (let i = 0; i < target.items.count; i++) {
-                        target.items.get(i)[Symbols.Control_handleUpdate]("@" + property.name, value);
+                        target.items.get(i)[Symbols.Control_handleChange]("@" + property.name, value);
                     }
                 }
             }
 
             for (let i = 0; i < target.children.count; i++) {
-                target.children.get(i)[Symbols.Control_handleUpdate](binding, value);
+                target.children.get(i)[Symbols.Control_handleChange](binding, value);
             }
         } catch (e) {
             this[Symbols.ErrorHandler][Symbols.ErrorHandler_handle](e);
