@@ -174,7 +174,7 @@ TBD
 <Control>
     <FromToList name="roleSelector"
         from.items="items"
-        from.items:onAdding="activity1"
+        from.items:adding="activity1"
         to.items="selectedItems"
         add:template="CustomAddButton - for exactly the control with the 'add' name"
         Button:template="CustomAddButton - for all buttons in this control. If there is a control with name 'Button' and Button control, handle it as an error"
