@@ -172,12 +172,16 @@ TBD
 </Control>
 
 <!--CustomFromToList-->
-<Control>
+<Control
+    items:onAdding="activity1"
+    clicked="activity1"
+    >
     <FromToList name="roleSelector"
         from.items="items"
+        from.items:onAdding="activity1"
         to.items="selectedItems"
-        add.template="CustomAddButton - for exactly the control with the 'add' name"
-        Button.template="CustomAddButton - for all buttons in this control. If there is a control with name 'Button' and Button control, handle it as an error"
+        add:template="CustomAddButton - for exactly the control with the 'add' name"
+        Button:template="CustomAddButton - for all buttons in this control. If there is a control with name 'Button' and Button control, handle it as an error"
         subControlName.Button.template="CustomAddButton - for all buttons in the 'subControlName' control"
         add.text="@Buttons.add | converter1"
         add.clicked="activity1"
@@ -185,15 +189,6 @@ TBD
         removed="activity1"
         add.extraValueForCustomControls="extraValue">
     </FromToList>
-    <OnUpdating property="items" run="activity1" />
-    <OnUpdated property="extraValue" run="activity1" />
-    <OnAdding property="items" run="activity1" />
-    <OnAdded property="items" run="activity1" />
-    <OnRemoving property="items" run="activity1" />
-    <OnRemoved property="items" run="activity1" />
-    <OnMoving property="items" run="activity1" />
-    <OnMoved property="items" run="activity1" />
-    <OnRaise event="someEvent" run="activity1" />
     <Activity name="activity1">
         <Update property="prop1" value="prop2" />
         <Add />
