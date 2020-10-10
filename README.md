@@ -174,7 +174,7 @@ TBD
     <FromToList name="roleSelector"
         isReadonly="*SomeSettings.isReadonly"
         isReadonly:updating="activity1"
-        from.items="items"
+        from.items="availableItems"
         from.items:adding="activity1"
         to.items="selectedItems"
         add:template="CustomAddButton - for exactly the control with the 'add' name"
