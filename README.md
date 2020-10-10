@@ -184,8 +184,7 @@ TBD
         add.clicked="activity1"
         added="activity1"
         removed="activity1"
-        add.extraValueForCustomControls="extraValue">
-    </FromToList>
+        add.extraValueForCustomControls="extraValue" />
     <Activity name="activity1">
         <Update property="prop1" value="prop2" />
         <Add />
