@@ -167,7 +167,6 @@ TBD
         <button />
     </div>
      <Activity name="activity1">
-        <!-- ... -->
      </Activity>
 </Control>
 
