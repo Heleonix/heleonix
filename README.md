@@ -180,11 +180,9 @@ TBD
         Button.template="CustomAddButton - for all buttons in this control. If there is a control with name 'Button' and Button control, handle it as an error"
         subControlName.Button.template="CustomAddButton - for all buttons in the 'subControlName' control"
         add.text="Dictionaries.Buttons.add | converter1"
-        add.clicked="activity1"
-        added="activity1"
-        removed="activity1"
-        add.extraValueForCustomControls="extraValue" />
-    <Activity name="activity1">
+        add.extraValueForCustomControls="extraValue"
+    />
+    <OnAdding property="roleSelector.from.items" name="activity1">
         <Update property="prop1" value="prop2" />
         <Add />
         <Remove />
