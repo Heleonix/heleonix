@@ -183,11 +183,11 @@ TBD
         add.extraValueForCustomControls="extraValue"
     />
     <OnAdding property="roleSelector.from.items" name="activity1">
-        <Update property="prop1" value="prop2" />
+        <Update property="roleSelector.prop1" value="roleSelector.add.prop2" />
         <Add />
         <Remove />
         <Move />
-        <Raise event="someEvent" prop1="prop1" prop2="prop2" />
+        <Raise event="someEvent" prop1="roleSelector.from.prop1" prop2="prop2" />
         <Call task="FetchSomething" prop1="prop1" prop2="prop2" prop3="prop3" />
     </Activity>
 </Control>
