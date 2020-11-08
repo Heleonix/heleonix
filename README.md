@@ -248,7 +248,7 @@ HttpService - provides many scenarios with requests:
 
 ### CONVERTERS
 
-classes with "format" and "parse", getDictionary(dictionaryName, keyName, ...args) functions.
+classes with "format", "parse", getDictionary(dictionaryName, keyName, ...args), getSetting(...) functions.
 
 ### TASKS
 
