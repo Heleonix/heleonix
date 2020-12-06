@@ -166,8 +166,9 @@ TBD
     <div>
         <button />
     </div>
-     <Activity name="activity1">
-     </Activity>
+    <OnChanging property="extraValueForCustomControls=" name="handleChanging">
+        ...
+    </OnChanging>
 </Control>
 
 <Control>
