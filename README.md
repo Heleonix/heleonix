@@ -177,9 +177,9 @@ TBD
         from.items="availableItems"
         from.items.Item.template=""
         to.items="selectedItems"
-        add.template="CustomAddButton - for exactly the control with the 'add' name"
-        Button.template="CustomAddButton - for all buttons in this control. If there is a control with name 'Button' and Button control, handle it as an error"
-        subControlName.Button.template="CustomAddButton - for all buttons in the 'subControlName' control"
+        add.template="Dictionaries.MyTemplates.CustomAddButton - for exactly the control with the 'add' name"
+        Button.template="Dictionaries.MyTemplates.CustomAddButton - for all buttons in this control. If there is a control with name 'Button' and Button control, handle it as an error"
+        subControlName.Button.template="Dictionaries.MyTemplates.CustomAddButton - for all buttons in the 'subControlName' control"
         add.text="Dictionaries.Buttons.add | converter1"
         add.extraValueForCustomControls="extraValue"
     />
@@ -225,10 +225,10 @@ List:
 
 ```xml
 <div>
-	<List name="myUsers" for="users" by="id" extraProperty="extraValue" Item.template="CustomListItem" />
+	<List name="myUsers" for="users" by="id" extraProperty="extraValue" Item.template="Dictionaries.Templates.CustomListItem" />
 </div>
 
-<!--CustomListItem: Dynamic name is [0], [1], [2] etc for getting/setting properties via users.[0].id-->
+<!--CustomListItem: Dynamic name is [0], [1], [2] etc for getting/setting properties via myUsers.[0].id-->
 <Control>
     <button name="id" value="extraProperty">item.id</button>
 </Control>
