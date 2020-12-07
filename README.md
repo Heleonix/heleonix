@@ -173,14 +173,14 @@ TBD
 
 <Control>
     <FromToList name="roleSelector"
-        isReadonly="Settings.SomeSettings.isReadonly | converter1"
+        isReadonly="settings.UIConfig.isReadonly | converter1"
         from.items="availableItems"
         from.items.Item.template=""
         to.items="selectedItems"
-        add.template="Dictionaries.MyTemplates.CustomAddButton - for exactly the control with the 'add' name"
-        Button.template="Dictionaries.MyTemplates.CustomAddButton - for all buttons in this control. If there is a control with name 'Button' and Button control, handle it as an error"
-        subControlName.Button.template="Dictionaries.MyTemplates.CustomAddButton - for all buttons in the 'subControlName' control"
-        add.text="Dictionaries.Buttons.add | converter1"
+        add.template="dictionaries.MyTemplates.CustomAddButton - for exactly the control with the 'add' name"
+        Button.template="dictionaries.MyTemplates.CustomAddButton - for all buttons in this control. If there is a control with name 'Button' and Button control, handle it as an error"
+        subControlName.Button.template="dictionaries.MyTemplates.CustomAddButton - for all buttons in the 'subControlName' control"
+        add.text="dictionaries.Buttons.add | converter1"
         add.extraValueForCustomControls="extraValue"
     />
     <OnAdding property="roleSelector.from.items" name="doSomethingOnAdding">
