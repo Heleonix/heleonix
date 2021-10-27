@@ -166,20 +166,21 @@ TBD
     <div>
         <button />
     </div>
-     <Activity name="activity1">
-     </Activity>
+    <OnChanging property="extraValueForCustomControls=" name="handleChanging">
+        ...
+    </OnChanging>
 </Control>
 
 <Control>
     <FromToList name="roleSelector"
-        isReadonly="Settings.SomeSettings.isReadonly | converter1"
+        isReadonly="settings.UIConfig.isReadonly | converter1"
         from.items="availableItems"
         from.items.Item.template=""
         to.items="selectedItems"
-        add.template="CustomAddButton - for exactly the control with the 'add' name"
-        Button.template="CustomAddButton - for all buttons in this control. If there is a control with name 'Button' and Button control, handle it as an error"
-        subControlName.Button.template="CustomAddButton - for all buttons in the 'subControlName' control"
-        add.text="Dictionaries.Buttons.add | converter1"
+        add.template="dictionaries.MyTemplates.CustomAddButton - for exactly the control with the 'add' name"
+        Button.template="dictionaries.MyTemplates.CustomAddButton - for all buttons in this control. If there is a control with name 'Button' and Button control, handle it as an error"
+        subControlName.Button.template="dictionaries.MyTemplates.CustomAddButton - for all buttons in the 'subControlName' control"
+        add.text="dictionaries.Buttons.add | converter1"
         add.extraValueForCustomControls="extraValue"
     />
     <OnAdding property="roleSelector.from.items" name="doSomethingOnAdding">
@@ -189,7 +190,10 @@ TBD
         <Move />
         <Raise event="someEvent" prop1="roleSelector.from.prop1" prop2="prop2" />
         <Call task="FetchSomething" prop1="prop1" prop2="prop2" prop3="prop3" />
-    </Activity>
+    </OnAdding>
+    <OnRaising event="add.clicked" name="doSomethingOnClicked">
+        <!--...-->
+    </OnRaising>
 </Control>
 
 
@@ -223,10 +227,10 @@ List:
 
 ```xml
 <div>
-	<List name="myUsers" for="users" by="id" extraProperty="extraValue" Item.template="CustomListItem" />
+	<List name="myUsers" for="users" by="id" extraProperty="extraValue" Item.template="Dictionaries.Templates.CustomListItem" />
 </div>
 
-<!--CustomListItem: Dynamic name is [0], [1], [2] etc for getting/setting properties via users.[0].id-->
+<!--CustomListItem: Dynamic name is [0], [1], [2] etc for getting/setting properties via myUsers.[0].id-->
 <Control>
     <button name="id" value="extraProperty">item.id</button>
 </Control>
@@ -247,7 +251,7 @@ HttpService - provides many scenarios with requests:
 
 ### CONVERTERS
 
-classes with "format" and "parse", getDictionary(dictionaryName, keyName, ...args) functions.
+classes with "format", "parse", getDictionary(dictionaryName, keyName, ...args), getSetting(...) functions.
 
 ### TASKS
 
