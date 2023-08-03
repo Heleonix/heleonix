@@ -188,7 +188,7 @@ TBD
         <Add />
         <Remove />
         <Move />
-        <Raise event="someEvent" prop1="roleSelector.from.prop1" prop2="prop2" />
+        <Raise event="someEvent" />
         <Call task="FetchSomething" prop1="prop1" prop2="prop2" prop3="prop3" />
     </OnAdding>
     <OnRaising event="add.clicked" name="doSomethingOnClicked">
