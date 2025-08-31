@@ -134,7 +134,7 @@ MyView.style:
 <Style extends="MyBaseView">
 	<border-color value="#aaa" />
 	<color>
-        vm.isValid ? 'green' : 'red'"
+        vm.isValid ? 'green' : 'red'
     </color>
 </Style>
 ```
@@ -145,7 +145,7 @@ Compiled into:
 {
 	"extends": "MyBaseView",
 	"items": {
-		"border-color": "#aaa";
+		"border-color": "#aaa",
 		"color": "vm => vm.isValid ? 'green' : 'red'"
 	}
 }
