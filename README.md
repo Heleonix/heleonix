@@ -90,7 +90,7 @@ Compiled into:
         "Add": "Add",
         "Remove": "Remove",
         "Ok": "OK {usertitle}",
-        "OkOrCancel": "Hi {username}! Are you {.Ok} or {#BaseControls.Cancel}?"
+        "OkOrCancel": "Hi {username}! Are you {.Ok} or {@BaseControls.Cancel}?"
     }
 }
 ```
@@ -133,10 +133,9 @@ MyView.style:
 ```xml
 <Style extends="MyBaseView">
 	<border-color value="#aaa" />
-  <width>
 	<color>
-    <!-- Think about conditional setting -->
-  </color>
+        vm.isValid ? 'green' : 'red'"
+    </color>
 </Style>
 ```
 
