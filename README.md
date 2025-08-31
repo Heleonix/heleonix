@@ -31,20 +31,20 @@ In webpack plugins context is specified as below:
 
 ```json
 [
-    // Least specific
+    // Most specific
     {
-        "name": "env",
-        "values": ["dev", "test", "prod"],
+        "name": "culture",
+        "values": ["en-US", "uk-UK"],
     },
     {
         "name": "customer",
         "values": ["customer1", "customer2", "customer3"],
     },
     {
-        "name": "culture",
-        "values": ["en-US", "uk-UK"],
-    },
-    // Most specific
+        "name": "env",
+        "values": ["dev", "test", "prod"],
+    }
+    // Least specific
 ];
 ```
 
@@ -62,7 +62,7 @@ Buttons.en-US.dic
 Buttons.en-US.customer1.dic
 Buttons.es-ES.customer1.dic
 
-Buttons.test.customer2.en-US.dic:
+Buttons.en-US.customer2.test.dic:
 
 ```xml
 <Dictionary>
@@ -82,9 +82,9 @@ Compiled into:
 {
     "name": "Buttons",
     "context": {
-        "env": "test",
-        "customer": "customer1",
-        "culture": "en-US"
+        "culture": "en-US",
+        "customer": "customer2",
+        "env": "test"
     },
     "items": {
         "Add": "Add",
