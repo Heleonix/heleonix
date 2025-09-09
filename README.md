@@ -161,7 +161,7 @@ TBD
 
 ````xml
 <!--CustomAddButton-->
-<Control Control.prop="propForAllControls">
+<Control>
     <div>
         <button />
     </div>
