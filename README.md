@@ -226,12 +226,14 @@ List:
 
 ```xml
 <div>
-	<List name="myUsers" for="users" by="id" extraProperty="extraValue" Item.template="Dictionaries.Templates.CustomListItem" />
+	<List name="myUsers" items="users" key="id" extraProperty="extraValue" Item.template="Dictionaries.Templates.CustomListItem" />
 </div>
 
-<!--CustomListItem: Dynamic name is [0], [1], [2] etc for getting/setting properties via myUsers.[0].id-->
+<!--CustomListItem: Dynamic name is the value of the key or 0, 1, 2 etc for getting/setting properties via myUsers.0.btn-
+every item has 'key' and 'item' properties
+->
 <Control>
-    <button name="id" value="extraProperty">item.id</button>
+    <button name="btn" value="extraProperty">item.someData</button>
 </Control>
 ```
 
