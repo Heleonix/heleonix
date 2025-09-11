@@ -60,7 +60,7 @@ MyFile.customer1.ext
 
 Buttons.en-US.dic
 Buttons.en-US.customer1.dic
-Buttons.es-ES.customer1.dic
+Buttons.en-GB.customer1.dic
 
 Buttons.en-US.customer2.test.dic:
 
@@ -97,12 +97,12 @@ Compiled into:
 
 Have methods:
 
--   setup(definition), like controls
+-   setup(definition), like components
 -   getValue(key, args)
 
-### SETTINGS (MERGEABLE)
+### CONFIGS (MERGEABLE)
 
-Key/Value pairs like dictionaries but with values of any JSON type and they cannot have replacement parameters and references to other keys or settings.
+Key/Value pairs like dictionaries but with values of any JSON type and they cannot have replacement parameters and references to other keys or configs.
 
 ### STYLES (MERGEABLE, EXTENDABLE)
 
@@ -157,20 +157,20 @@ Style.js:
 
 TBD
 
-### CONTROLS
+### COMPONENTS
 
 ````xml
 <!--CustomAddButton-->
-<Control>
+<Component>
     <div>
         <button />
     </div>
     <OnChanging property="extraValueForCustomControls" name="handleChanging">
         ...
     </OnChanging>
-</Control>
+</Component>
 
-<Control>
+<Component>
     <FromToList name="roleSelector"
         isReadonly="#UIConfig.isReadonly | converter1"
         from.items=".availableItems"
@@ -193,21 +193,21 @@ TBD
     <OnRaising event="roleSelector.add.click" name="handleAdding">
         <!--...-->
     </OnRaising>
-</Control>
+</Component>
 
 
 
 FromToList.view:
 
 ```xml
-<Control>
+<Component>
 	<div>
 		<List name="from" />
 		<Button name="add" />
 		<Button name="remove" />
 		<List name="to" />
 	</div>
-</Control>
+</Component>
 ````
 
 Switch:
@@ -232,9 +232,9 @@ List:
 <!--CustomListItem: Dynamic name is the value of the key or 0, 1, 2 etc for getting/setting properties via myUsers.0.btn-
 every item has 'key' and 'item' properties
 ->
-<Control>
+<Component>
     <button name="btn" value=".extraProperty">.item.someData</button>
-</Control>
+</Component>
 ```
 
 ### SERVICES
@@ -257,14 +257,14 @@ classes with "format", "parse", getDictionary(dictionaryName, keyName, ...args),
 ### TASKS
 
 have "run" function and any number of properties.
-have getSetting(settingName, settingKey) function.
+have getConfig(name, key) function.
 Can inject services.
 
 ### PROVIDERS
 
-Provide dictionary definitions, control definitions, style definitions, theme definitions, settings definitions.
+Provide dictionary definitions, component definitions, style definitions, theme definitions, configs definitions.
 Can inject services.
-have getSetting(settingName, settingKey) function.
+have getConfig(name, key) function.
 
 index.html -> `<div id="root"></div>`
 
