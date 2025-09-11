@@ -58,11 +58,11 @@ MyFile.customer1.ext
 
 ### DICTIONARIES (MERGEABLE)
 
-Buttons.en-US.dic
-Buttons.en-US.customer1.dic
-Buttons.en-GB.customer1.dic
+Buttons.en-US.hxd
+Buttons.en-US.customer1.hxd
+Buttons.en-GB.customer1.hxd
 
-Buttons.en-US.customer2.test.dic:
+Buttons.en-US.customer2.test.hxd:
 
 ```xml
 <Dictionary>
@@ -100,7 +100,7 @@ Have methods:
 -   setup(definition), like components
 -   getValue(key, args)
 
-### CONFIGS (MERGEABLE)
+### CONFIGS (MERGEABLE): *.hxc
 
 Key/Value pairs like dictionaries but with values of any JSON type and they cannot have replacement parameters and references to other keys or configs.
 
@@ -124,11 +124,11 @@ OR
 <li class="auto generated classes">three</li>
 ```
 
-MyView.style
-MyView.customer1.style
-MyView.en-US.customer1.style
+MyView.hxs
+MyView.customer1.hxs
+MyView.en-US.customer1.hxs
 
-MyView.style:
+MyView.hxs:
 
 ```xml
 <Style extends="MyBaseView">
@@ -153,9 +153,10 @@ Compiled into:
 
 Style.js:
 
-### THEMES
+### THEMES: *.hxt
 
 TBD
+
 
 ### COMPONENTS
 
@@ -197,7 +198,7 @@ TBD
 
 
 
-FromToList.view:
+FromToList.hxm:
 
 ```xml
 <Component>
