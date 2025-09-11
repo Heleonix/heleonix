@@ -165,32 +165,32 @@ TBD
     <div>
         <button />
     </div>
-    <OnChanging property="extraValueForCustomControls=" name="handleChanging">
+    <OnChanging property=".extraValueForCustomControls" name="handleChanging">
         ...
     </OnChanging>
 </Control>
 
 <Control>
     <FromToList name="roleSelector"
-        isReadonly="settings.UIConfig.isReadonly | converter1"
-        from.items="availableItems"
+        isReadonly="#UIConfig.isReadonly | converter1"
+        from.items=".availableItems"
         from.items.Item.template=""
-        to.items="selectedItems"
-        add.template="dictionaries.MyTemplates.CustomAddButton - for exactly the control with the 'add' name"
-        Button.template="dictionaries.MyTemplates.CustomAddButton - for all buttons in this control. If there is a control with name 'Button' and Button control, handle it as an error"
-        subControlName.Button.template="dictionaries.MyTemplates.CustomAddButton - for all buttons in the 'subControlName' control"
-        add.text="dictionaries.Buttons.add | converter1"
-        add.extraValueForCustomControls="extraValue"
+        to.items=".selectedItems"
+        add.template="@MyTemplates.CustomAddButton - for exactly the control with the 'add' name"
+        Button.template="@MyTemplates.CustomAddButton - for all buttons in this control. If there is a control with name 'Button' and Button control, handle it as an error"
+        subControlName.Button.template="@MyTemplates.CustomAddButton - for all buttons in the 'subControlName' control"
+        add.text="@Buttons.add | converter1"
+        add.extraValueForCustomControls=".extraValue"
     />
     <OnAdding property="roleSelector.from.items" name="doSomethingOnAdding">
-        <Update property="roleSelector.prop1" value="roleSelector.add.prop2" />
+        <Update property="roleSelector.prop1" value=".roleSelector.add.prop2" />
         <Add />
         <Remove />
         <Move />
         <Raise event="someEvent" />
-        <Call task="FetchSomething" prop1="prop1" prop2="prop2" prop3="prop3" />
+        <Call task="FetchSomething" prop1=".prop1" prop2=".prop2" prop3=".prop3" />
     </OnAdding>
-    <OnRaising event="roleSelector.add.clicked" name="doSomethingOnClicked">
+    <OnRaising event="roleSelector.add.click" name="doSomethingOnClicked">
         <!--...-->
     </OnRaising>
 </Control>
@@ -226,14 +226,14 @@ List:
 
 ```xml
 <div>
-	<List name="myUsers" items="users" key="id" extraProperty="extraValue" Item.template="Dictionaries.Templates.CustomListItem" />
+	<List name="myUsers" items=".users" key="id" extraProperty=".extraValue" Item.template="@Templates.CustomListItem" />
 </div>
 
 <!--CustomListItem: Dynamic name is the value of the key or 0, 1, 2 etc for getting/setting properties via myUsers.0.btn-
 every item has 'key' and 'item' properties
 ->
 <Control>
-    <button name="btn" value="extraProperty">item.someData</button>
+    <button name="btn" value=".extraProperty">.item.someData</button>
 </Control>
 ```
 
