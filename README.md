@@ -239,7 +239,7 @@ every item has 'key' and 'item' properties
 
 ### SERVICES
 
-Can inject another services.
+Can inject other services.
 
 HttpService - provides many scenarios with requests:
 
@@ -252,7 +252,7 @@ HttpService - provides many scenarios with requests:
 
 ### CONVERTERS
 
-classes with "format", "parse", getDictionary(dictionaryName, keyName, ...args), getSetting(...) functions.
+classes with "format", "parse", getDictionary(dictionaryName, keyName, ...args), getConfig(...) functions.
 
 ### TASKS
 
