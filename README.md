@@ -160,7 +160,7 @@ TBD
 
 ### COMPONENTS
 
-````xml
+```xml
 <!--CustomAddButton-->
 <Component>
     <div>
@@ -195,8 +195,7 @@ TBD
         <!--...-->
     </OnRaising>
 </Component>
-
-
+```
 
 FromToList.hxm:
 
@@ -209,7 +208,7 @@ FromToList.hxm:
 		<List name="to" />
 	</div>
 </Component>
-````
+```
 
 Switch:
 
