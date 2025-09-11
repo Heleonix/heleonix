@@ -190,7 +190,7 @@ TBD
         <Raise event="someEvent" />
         <Call task="FetchSomething" prop1=".prop1" prop2=".prop2" prop3=".prop3" />
     </OnAdding>
-    <OnRaising event="roleSelector.add.click" name="doSomethingOnClicked">
+    <OnRaising event="roleSelector.add.click" name="handleAdding">
         <!--...-->
     </OnRaising>
 </Control>
