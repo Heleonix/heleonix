@@ -165,7 +165,7 @@ TBD
     <div>
         <button />
     </div>
-    <OnChanging property=".extraValueForCustomControls" name="handleChanging">
+    <OnChanging property="extraValueForCustomControls" name="handleChanging">
         ...
     </OnChanging>
 </Control>
