@@ -166,7 +166,7 @@ TBD
     <div>
         <button />
     </div>
-    <OnUpdating target="extraValueForCustomControls" name="handleChanging">
+    <OnUpdating property="extraValueForCustomControls" name="handleUpdate">
         ...
     </OnUpdating>
 </Component>
@@ -183,7 +183,7 @@ TBD
         add.text="@Buttons.add | converter1"
         add.extraValueForCustomControls=".extraValue"
     />
-    <OnAdding target="roleSelector.from.items OR .myData.fromItems" name="doSomethingOnAdding">
+    <OnAdding property="roleSelector.from.items" name="doSomethingOnAdding">
         <Update target="roleSelector.prop1" value=".roleSelector.add.prop2" />
         <Add />
         <Remove />
