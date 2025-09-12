@@ -166,7 +166,7 @@ TBD
     <div>
         <button />
     </div>
-    <OnUpdating property="extraValueForCustomControls" name="handleChanging">
+    <OnUpdating target="extraValueForCustomControls" name="handleChanging">
         ...
     </OnUpdating>
 </Component>
