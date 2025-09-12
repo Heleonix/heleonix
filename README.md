@@ -174,15 +174,20 @@ TBD
 <Component>
     <FromToList name="roleSelector"
         isReadonly="#UIConfig.isReadonly | converter1"
-        from.items=".availableItems"
-        from.items.Item.template=""
+        from2.items=".availableItems"
+        from2.items.Item.template=""
         to.items=".selectedItems"
         add.template="@MyTemplates.CustomAddButton - for exactly the control with the 'add' name"
         Button.template="@MyTemplates.CustomAddButton - for all buttons in this control. If there is a control with name 'Button' and Button control, handle it as an error"
         subControlName.Button.template="@MyTemplates.CustomAddButton - for all buttons in the 'subControlName' control"
         add.text="@Buttons.add | converter1"
         add.extraValueForCustomControls=".extraValue"
-    />
+    >
+        <from.template>
+            <div><List name="from2"/></div>
+        </from.template>
+        <Button.template></Button.template>
+    </FromToList>
     <OnAdding property="roleSelector.from.items" name="doSomethingOnAdding">
         <Update property="roleSelector.prop1" value=".roleSelector.add.prop2" />
         <Add />
