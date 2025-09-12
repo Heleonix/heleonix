@@ -124,11 +124,11 @@ OR
 <li class="auto generated classes">three</li>
 ```
 
-MyView.hxs
-MyView.customer1.hxs
-MyView.en-US.customer1.hxs
+MyComponent.hxs
+MyComponent.customer1.hxs
+MyComponent.en-US.customer1.hxs
 
-MyView.hxs:
+MyComponent.hxs:
 
 ```xml
 <Style extends="MyBaseView">
@@ -143,7 +143,7 @@ Compiled into:
 
 ```json
 {
-	"extends": "MyBaseView",
+	"extends": "MyBaseComponent",
 	"items": {
 		"border-color": "#aaa",
 		"color": "vm => vm.isValid ? 'green' : 'red'"
@@ -158,20 +158,20 @@ Style.js:
 TBD
 
 
-### COMPONENTS
+### TEMPLATES
 
 ```xml
 <!--CustomAddButton-->
-<Component>
+<Template>
     <div>
         <button />
     </div>
     <OnUpdating property="extraValueForCustomControls" name="handleUpdate">
         ...
     </OnUpdating>
-</Component>
+</Template>
 
-<Component>
+<Template>
     <FromToList name="roleSelector"
         isReadonly="#UIConfig.isReadonly | converter1"
         from2.items=".availableItems"
@@ -199,20 +199,20 @@ TBD
     <OnRaising event="roleSelector.add.click" name="handleAdding">
         <!--...-->
     </OnRaising>
-</Component>
+</Template>
 ```
 
 FromToList.hxm:
 
 ```xml
-<Component>
+<Template>
 	<div>
 		<List name="from" />
 		<Button name="add" />
 		<Button name="remove" />
 		<List name="to" />
 	</div>
-</Component>
+</Template>
 ```
 
 Switch:
@@ -237,9 +237,9 @@ List:
 <!--CustomListItem: Dynamic name is the value of the key or 0, 1, 2 etc for getting/setting properties via myUsers.0.btn-
 every item has 'key' and 'item' properties
 ->
-<Component>
+<Template>
     <button name="btn" value=".extraProperty">.item.someData</button>
-</Component>
+</Template>
 ```
 
 ### SERVICES
