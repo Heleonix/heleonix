@@ -184,7 +184,7 @@ TBD
         add.extraValueForCustomControls=".extraValue"
     />
     <OnAdding property="roleSelector.from.items" name="doSomethingOnAdding">
-        <Update target="roleSelector.prop1" value=".roleSelector.add.prop2" />
+        <Update property="roleSelector.prop1" value=".roleSelector.add.prop2" />
         <Add />
         <Remove />
         <Move />
