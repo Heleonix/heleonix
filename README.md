@@ -194,7 +194,7 @@ TBD
         <Remove />
         <Move />
         <Raise event="someEvent" />
-        <Call task="FetchSomething" prop1=".prop1" prop2=".prop2" prop3=".prop3" />
+        <Execute action="FetchSomething" prop1=".prop1" prop2=".prop2" prop3=".prop3" />
     </OnAdding>
     <OnRaising event="roleSelector.add.click" name="handleAdding">
         <!--...-->
@@ -259,15 +259,15 @@ HttpService - provides many scenarios with requests:
 
 classes with "format", "parse", getDictionary(dictionaryName, keyName, ...args), getConfig(...) functions.
 
-### TASKS
+### ACTIONS
 
-have "run" function and any number of properties.
+have "execute" function and an object with all passed properties
 have getConfig(name, key) function.
 Can inject services.
 
 ### PROVIDERS
 
-Provide dictionary definitions, component definitions, style definitions, theme definitions, configs definitions.
+Provide dictionary definitions, component definitions, style definitions, theme definitions, configs definitions (in yhis case a config to fetch other configs needs to be available earlier, i.e. defined at compile time).
 Can inject services.
 have getConfig(name, key) function.
 
