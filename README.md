@@ -174,14 +174,14 @@ TBD
 <Template>
     <FromToList name="roleSelector"
         isReadonly="#UIConfig.isReadonly | converter1"
-        from2.items=".availableItems"
+        from2.items="availableItems"
         from2.items.Item.template=""
-        to.items=".selectedItems"
+        to.items="selectedItems"
         add.template="@MyTemplates.CustomAddButton - for exactly the control with the 'add' name"
         Button.template="@MyTemplates.CustomAddButton - for all buttons in this control. If there is a control with name 'Button' and Button control, handle it as an error"
         subControlName.Button.template="@MyTemplates.CustomAddButton - for all buttons in the 'subControlName' control"
         add.text="@Buttons.add | converter1"
-        add.extraValueForCustomControls=".extraValue"
+        add.extraValueForCustomControls="extraValue"
     >
         <from.template>
             <div><List name="from2"/></div>
@@ -189,12 +189,12 @@ TBD
         <Button.template></Button.template>
     </FromToList>
     <OnAdding property="roleSelector.from.items" name="doSomethingOnAdding">
-        <Update property="roleSelector.prop1" value=".roleSelector.add.prop2" />
+        <Update property="roleSelector.prop1" value="roleSelector.add.prop2" />
         <Add />
         <Remove />
         <Move />
         <Raise event="someEvent" />
-        <Execute action="FetchSomething" prop1=".prop1" prop2=".prop2" prop3=".prop3" />
+        <Execute action="FetchSomething" prop1="prop1" prop2="prop2" prop3="prop3" />
     </OnAdding>
     <OnRaising event="roleSelector.add.click" name="handleAdding">
         <!--...-->
@@ -231,14 +231,14 @@ List:
 
 ```xml
 <div>
-	<List name="myUsers" items=".users" key="id" extraProperty=".extraValue" Item.template="@Templates.CustomListItem" />
+	<List name="myUsers" items="users" key="id" extraProperty="extraValue" Item.template="@Templates.CustomListItem" />
 </div>
 
 <!--CustomListItem: Dynamic name is the value of the key or 0, 1, 2 etc for getting/setting properties via myUsers.0.btn-
 every item has 'key' and 'item' properties
 ->
 <Template>
-    <button name="btn" value=".extraProperty">.item.someData</button>
+    <button name="btn" value="extraProperty">item.someData</button>
 </Template>
 ```
 
