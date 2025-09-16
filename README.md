@@ -132,13 +132,14 @@ MyComponent.hxs:
 
 ```xml
 <Style extends="MyBaseView">
-	<border-color property-"myProp" theme="primary-400" value="#aaa" />
+	<border-color property="myProp" theme="primary-400" value="#aaa" />
     <background-color property="myProp" />
 	<color theme="primary-400" />
     <OnUpdating property="myProp">
         <padding value="10px" />
     <OnUpdating />
     <OnRaising event="someEvent">
+        <color property="someEvent.someVslue" />
     </OnRaising>
     <If property="prop" ???
     </If>
