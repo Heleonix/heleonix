@@ -29,7 +29,7 @@ Context is an object with string values, which splits resources of applications:
 
 In webpack plugins context is specified as below:
 
-```json
+```javascript
 [
     // Most specific
     {
@@ -45,7 +45,7 @@ In webpack plugins context is specified as below:
         "values": ["dev", "test", "prod"],
     }
     // Least specific
-];
+]
 ```
 
 Context-specific files are named in format:
@@ -132,16 +132,16 @@ MyComponent.hxs:
 
 ```xml
 <Style extends="MyBaseView">
-	<border-color value="#aaa" />
-  <background-color property="myProp" />
+	<border-color property-"myProp" theme="primary-400" value="#aaa" />
+    <background-color property="myProp" />
 	<color theme="primary-400" />
-  <OnUpdating property="myProp">
-    <padding value="10px" />
-  <OnUpdating />
-  <OnRaising event="someEvent">
-  </OnRaising>
-  <If property="prop" ???
-  </If>
+    <OnUpdating property="myProp">
+        <padding value="10px" />
+    <OnUpdating />
+    <OnRaising event="someEvent">
+    </OnRaising>
+    <If property="prop" ???
+    </If>
   ???
 </Style>
 ```
