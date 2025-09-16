@@ -133,9 +133,16 @@ MyComponent.hxs:
 ```xml
 <Style extends="MyBaseView">
 	<border-color value="#aaa" />
-	<color>
-        vm.isValid ? 'green' : 'red'
-    </color>
+  <background-color property="myProp" />
+	<color theme="primary-400" />
+  <OnUpdating property="myProp">
+    <padding value="10px" />
+  <OnUpdating />
+  <OnRaising event="someEvent">
+  </OnRaising>
+  <If property="prop" ???
+  </If>
+  ???
 </Style>
 ```
 
