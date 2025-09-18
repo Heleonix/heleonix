@@ -183,7 +183,7 @@ TBD
     <FromToList name="roleSelector"
         isReadonly="#UIConfig.isReadonly | converter1"
         from2.items="availableItems"
-        from2.items.Item.template=""
+        from2.Item.template=""
         to.items="selectedItems"
         add.template="@MyTemplates.CustomAddButton - for exactly the control with the 'add' name"
         Button.template="@MyTemplates.CustomAddButton - for all buttons in this control. If there is a control with name 'Button' and Button control, handle it as an error"
