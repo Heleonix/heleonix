@@ -71,7 +71,7 @@ Buttons.en-US.customer2.test.hxd:
     <Ok>OK {usertitle}</Ok>
     <!--for this message you must provide params: username, usertitle-->
     <OkOrCancel>
-        Hi {username}! Are you {.Ok} or {@BaseControls.Cancel}?
+        Hi {username}! Are you {@Ok} or {@BaseControls.Cancel}?
     </OkOrCancel>
 </Dictionary>
 ```
