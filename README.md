@@ -90,7 +90,7 @@ Compiled into:
         "Add": "Add",
         "Remove": "Remove",
         "Ok": "OK {usertitle}",
-        "OkOrCancel": "Hi {username}! Are you {.Ok} or {@BaseControls.Cancel}?"
+        "OkOrCancel": "Hi {username}! Are you {@Ok} or {@BaseControls.Cancel}?"
     }
 }
 ```
