@@ -170,14 +170,14 @@ TBD
 
 ```xml
 <!--CustomAddButton-->
-<Template>
+<template>
     <div>
         <button />
     </div>
-    <OnUpdating property="extraValueForCustomControls" name="handleUpdate">
+    <hx-on-updating property="extraValueForCustomComponents" name="handleUpdate">
         ...
-    </OnUpdating>
-</Template>
+    </hx-on-updating>
+</template>
 
 <Template>
     <FromToList name="roleSelector"
