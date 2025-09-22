@@ -138,10 +138,13 @@ MyComponent.hxs:
     <OnUpdating property="myProp">
         <padding value="10px" />
     <OnUpdating />
+    <OnAdding property="">
+    </OnAdding>
+    ...
     <OnRaising event="someEvent">
         <color property="someEvent.someVslue" />
     </OnRaising>
-    <If property="prop">
+    <If property="isInvalid">
     </If>
   ???
 </Style>
