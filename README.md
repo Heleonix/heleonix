@@ -131,7 +131,7 @@ MyComponent.en-US.customer1.hxs
 MyComponent.hxs:
 
 ```xml
-<Style extends="MyBaseView">
+<Style>
 	<border-color property="myProp" theme="primary-400" value="#aaa" />
     <background-color property="myProp" />
 	<color theme="primary-400" />
@@ -141,7 +141,7 @@ MyComponent.hxs:
     <OnRaising event="someEvent">
         <color property="someEvent.someVslue" />
     </OnRaising>
-    <If property="prop" ???
+    <If property="prop">
     </If>
   ???
 </Style>
