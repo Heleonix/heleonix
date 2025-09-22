@@ -232,7 +232,7 @@ Switch:
 TODO
 ```
 
-When:
+If:
 
 ```xml
 TODO
