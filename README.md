@@ -146,11 +146,11 @@ MyComponent.hxs:
     <If property="isInvalid">
     </If>
     <!---->
-    <Style name="childComponentName">
+    <Style name="descendant.component.name">
         <color value="#123" />
     </Style>
     <!-- All descendant buttons in this component. Works as Template -->
-    <Style name="Button">
+    <Style name="CustomCmpnt.Button">
         <color value="#123" />
     </Style>
 </Style>
@@ -193,10 +193,10 @@ TBD
         from2.Item.Template=""
         to.items="selectedItems"
         add.Template="@MyTemplates.CustomAddButton - for exactly the control with the 'add' name"
-        Button.Template="@MyTemplates.CustomAddButton - for all buttons in this control. If there is a control with name 'Button' and Button control, handle it as an error"
-        subControlName.Button.Template="@MyTemplates.CustomAddButton - for all buttons in the 'subControlName' control"
+        Button.Template="@MyTemplates.CustomAddButton - for all descendant buttons in this component. If there is a control with name 'Button' and Button component, handle it as an error"
+        subControlName.Button.Template="@MyTemplates.CustomAddButton - for all buttons in the 'subControlName' component"
         add.text="@Buttons.add | converter1"
-        add.extraValueForCustomControls="extraValue"
+        add.extraValueForCustomComponents="extraValue"
     >
         <from.Template>
             <div><List name="from2"/></div>
