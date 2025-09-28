@@ -132,9 +132,8 @@ MyComponent.hxs:
 
 ```xml
 <Style>
-	<border-color property="myProp" theme="primary-400" value="#aaa" />
-    <background-color property="myProp" />
-	<color theme="primary-400" />
+	<border-color value="$primary" />
+    <background-color value="myProp" />
     <OnUpdating property="myProp">
         <padding value="10px" />
     <OnUpdating />
@@ -142,7 +141,7 @@ MyComponent.hxs:
     </OnAdding>
     ...
     <OnRaising event="someEvent">
-        <color property="someEvent.someVslue" />
+        <color value="someEvent.someVslue" />
     </OnRaising>
     <If property="isInvalid">
     </If>
@@ -154,10 +153,8 @@ Compiled into:
 
 ```json
 {
-	"extends": "MyBaseComponent",
 	"items": {
-		"border-color": "#aaa",
-		"color": "vm => vm.isValid ? 'green' : 'red'"
+		"border-color": "$primary",
 	}
 }
 ```
