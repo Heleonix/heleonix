@@ -145,7 +145,14 @@ MyComponent.hxs:
     </OnRaising>
     <If property="isInvalid">
     </If>
-  ???
+    <!---->
+    <Style name="childComponentName">
+        <color value="#123" />
+    </Style>
+    <!-- All descendant buttons in this component. Works as Template -->
+    <Style name="Button">
+        <color value="#123" />
+    </Style>
 </Style>
 ```
 
