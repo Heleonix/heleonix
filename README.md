@@ -250,10 +250,10 @@ List:
 </div>
 
 <!--CustomListItem: Dynamic name is the value of the key or 0, 1, 2 etc for getting/setting properties via myUsers.0.btn-
-every item has 'key' and 'item' properties
+every item has 'key' and spread item's properties
 ->
 <Template>
-    <button name="btn" value="extraProperty">item.someData</button>
+    <button name="key" value="extraProperty">someUserData</button>
 </Template>
 ```
 
