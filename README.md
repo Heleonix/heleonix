@@ -132,8 +132,11 @@ MyComponent.hxs:
 
 ```xml
 <Style>
-	<border-color value="$primary" />
-    <background-color value="myProp" />
+    <padding value="{$Spacing.xs}" />
+    <background-color value="red" />
+    <width value="8px" media="screen"//optional default
+           max-width="{$Breakpoints.xs}" />
+    <box-shadow value="10px {someProp}px {$Colors.primary}" />
     <OnUpdating property="myProp">
         <padding value="10px" />
     <OnUpdating />
@@ -161,7 +164,7 @@ Compiled into:
 ```json
 {
 	"items": {
-		"border-color": "$primary",
+		"border-color": "{$primary}",
 	}
 }
 ```
