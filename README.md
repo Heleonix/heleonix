@@ -104,7 +104,7 @@ Have methods:
 
 Key/Value pairs like dictionaries but with values of any JSON type and they cannot have replacement parameters and references to other keys or configs.
 
-### STYLES (MERGEABLE, EXTENDABLE)
+### STYLES (MERGEABLE)
 
 Style is applied as class="auto generated classes" to the root native html elements only, i.e.:
 
