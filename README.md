@@ -249,14 +249,14 @@ List:
 
 ```xml
 <div>
-	<List name="myUsers" items="users" key="id" extraProperty="extraValue" Item.template="@Templates.CustomListItem" />
+	<List name="myUsers" items="users" extraProperty="extraValue" Item.template="@Templates.CustomListItem" />
 </div>
 
 <!--CustomListItem: Dynamic name is the value of the key or 0, 1, 2 etc for getting/setting properties via myUsers.0.btn-
-every item has 'key' and spread item's properties
+every item has  spread item's properties
 ->
 <Template>
-    <button name="key" value="extraProperty">someUserData</button>
+    <button name="someUniqueProp" value="extraProperty">someUserData</button>
 </Template>
 ```
 
