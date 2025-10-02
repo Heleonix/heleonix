@@ -132,8 +132,8 @@ MyComponent.hxs:
 
 ```xml
 <Style>
-    <padding value="{$Spacing.xs}" />
-    <background-color value="red" />
+    <padding value="{$Spacing.xs}" hover />
+    <background-color value="red" visited />
     <width value="8px" media="screen"//optional default
            max-width="{$Breakpoints.xs}" />
     <box-shadow value="10px {someProp}px {$Colors.primary}" />
