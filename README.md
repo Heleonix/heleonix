@@ -124,6 +124,9 @@ OR
 <li class="auto generated classes">three</li>
 ```
 
+For component's properties and theme values corresponding css variables are generated with corresponding names. When i.e. property is changed, the css variable is changed via JavaScript and the style is updated automatically.
+
+
 MyComponent.hxs
 MyComponent.customer1.hxs
 MyComponent.en-US.customer1.hxs
