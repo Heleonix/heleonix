@@ -152,11 +152,11 @@ MyComponent.hxs:
     <If property="isInvalid">
     </If>
     <!---->
-    <Style name="descendant.component.name">
+    <Style component="descendant.component.name">
         <color value="#123" />
     </Style>
     <!-- All descendant buttons in this component. Works as Template -->
-    <Style name="CustomCmpnt.Button">
+    <Style component="CustomCmpnt.Button">
         <color value="#123" />
     </Style>
 </Style>
