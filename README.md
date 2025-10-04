@@ -158,8 +158,8 @@ MyComponent.hxs:
     <Style hover="true" component="descendant.component.name">
         <color value="#123" />
     </Style>
-    <!-- All descendant buttons in this component. Works as Template -->
-    <Style max-width="600px" component="CustomCmpnt.Button">
+    <!-- All child buttons in this component. Works as Template -->
+    <Style max-width="600px" component="CustomSubCmpnt.Button">
         <color value="#123" />
     </Style>
 </Style>
@@ -202,7 +202,7 @@ TBD
         from2.Item.Template=""
         to.items="selectedItems"
         add.Template="@MyTemplates.CustomAddButton - for exactly the control with the 'add' name"
-        Button.Template="@MyTemplates.CustomAddButton - for all descendant buttons in this component. If there is a control with name 'Button' and Button component, handle it as an error"
+        Button.Template="@MyTemplates.CustomAddButton - for all child buttons in this component. If there is a control with name 'Button' and Button component, handle it as an error"
         subControlName.Button.Template="@MyTemplates.CustomAddButton - for all buttons in the 'subControlName' component"
         add.text="@Buttons.add | converter1"
         add.extraValueForCustomComponents="extraValue"
