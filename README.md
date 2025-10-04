@@ -147,7 +147,7 @@ MyComponent.hxs:
     </OnAdding>
     ...
     <OnRaising event="someEvent">
-        <color value="someEvent.someVslue" />
+        <color value="{someEvent.someVslue}" />
     </OnRaising>
     <If property="isInvalid">
     </If>
