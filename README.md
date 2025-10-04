@@ -152,11 +152,14 @@ MyComponent.hxs:
     <If property="isInvalid">
     </If>
     <!---->
-    <Style component="descendant.component.name">
+    <Style media="screen" max-widht="600px" hover="true">
+        <color value="#123" />
+    </Style>
+    <Style hover="true" component="descendant.component.name">
         <color value="#123" />
     </Style>
     <!-- All descendant buttons in this component. Works as Template -->
-    <Style component="CustomCmpnt.Button">
+    <Style max-width="600px" component="CustomCmpnt.Button">
         <color value="#123" />
     </Style>
 </Style>
