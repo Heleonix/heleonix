@@ -268,8 +268,6 @@ every item has  spread item's properties
 
 ### SERVICES
 
-Can inject other services.
-
 HttpService - provides many scenarios with requests:
 
 -   sequential requests
@@ -278,24 +276,25 @@ HttpService - provides many scenarios with requests:
 -   optimistic updates with pending statuses
 -   etc
 -   Returns an empty object with internal promise, so it can be bound to a view, so when promise is resolved, the empty object is populated with data and model is updated and view is refreshed.
+- Can inject other services.
 
 ### CONVERTERS
 
 Classes with "format", "parse" functions.
-Have getDictionary(name, key, args) function.
-Have getConfig(name, key) function.
+- Have getDictionary(name, key, args) function.
+- Have getConfig(name, key) function.
 
 ### ACTIONS
 
-Have "execute" function and an object with all passed properties
-Have getConfig(name, key) function.
-Can inject services.
+- Have "execute" function and an object with all passed properties
+- Have getConfig(name, key) function.
+- Can inject services.
 
 ### PROVIDERS
 
 Provide dictionary definitions, component definitions, style definitions, theme definitions, configs definitions (in yhis case a config to fetch other configs needs to be available earlier, i.e. defined at compile time).
-Have getConfig(name, key) function.
-Can inject services.
+- Have getConfig(name, key) function.
+- Can inject services.
 
 index.html -> `<div id="root"></div>`
 
