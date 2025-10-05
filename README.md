@@ -281,19 +281,21 @@ HttpService - provides many scenarios with requests:
 
 ### CONVERTERS
 
-classes with "format", "parse", getDictionary(dictionaryName, keyName, ...args), getConfig(...) functions.
+Classes with "format", "parse" functions.
+Have getDictionary(name, key, args) function.
+Have getConfig(name, key) function.
 
 ### ACTIONS
 
-have "execute" function and an object with all passed properties
-have getConfig(name, key) function.
+Have "execute" function and an object with all passed properties
+Have getConfig(name, key) function.
 Can inject services.
 
 ### PROVIDERS
 
 Provide dictionary definitions, component definitions, style definitions, theme definitions, configs definitions (in yhis case a config to fetch other configs needs to be available earlier, i.e. defined at compile time).
+Have getConfig(name, key) function.
 Can inject services.
-have getConfig(name, key) function.
 
 index.html -> `<div id="root"></div>`
 
