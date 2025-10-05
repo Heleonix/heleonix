@@ -190,7 +190,7 @@ TBD
     <div>
         <button />
     </div>
-    <OnUpdating property="extraValueForCustomComponents" name="handleUpdate">
+    <OnUpdating property="add.extraValueForCustomComponents" name="handleUpdate">
         ...
     </OnUpdating>
 </Template>
